@@ -22,9 +22,15 @@
 <?php
 
 	echo "<p>Witaj ".$_SESSION['user'].'! [ <a href="logout.php">Wyloguj się!</a> ]</p>';
-	
-	
 	echo "<p><b>E-mail</b>: ".$_SESSION['email']. "</b></p>";
+
+	if($_SESSION['dostep'] == "admin"){
+
+	echo '<p>[ <a href="adminpanel.php">Panel administratora</a> ]</p>';
+
+	}
+	echo '<p>[ <a href="wypozyczenia.php">Historia wypozyczen!</a> ]</p>';
+	
 	
 ?>
 

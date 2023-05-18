@@ -39,6 +39,7 @@
 					$_SESSION['user'] = $wiersz['user'];
 					$_SESSION['email'] = $wiersz['email'];
 					$_SESSION['dnipremium'] = $wiersz['dnipremium'];
+					$_SESSION['dostep'] = $wiersz['dostep'];
 					
 					unset($_SESSION['blad']);
 					$rezultat->free_result();
