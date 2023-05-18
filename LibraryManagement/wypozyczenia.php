@@ -18,7 +18,7 @@ if (!isset($_SESSION['zalogowany']))
 
     $userID = $_SESSION['id'];
 
-    $query = "SELECT inwentarz.tytul, inwentarz.autor, wypozyczenia.data_wypozyczenia, wypozyczenia.data_zwrotu
+    $query = "SELECT inwentarz.tytul, inwentarz.autor, inwentarz.gatunek, wypozyczenia.data_wypozyczenia, wypozyczenia.data_zwrotu
     FROM wypozyczenia INNER JOIN inwentarz ON wypozyczenia.id_inwentarz = inwentarz.id WHERE wypozyczenia.id_uzytkownika = $userID";
 
     $rezultat = $polaczenie->query($query);
@@ -30,6 +30,7 @@ if (!isset($_SESSION['zalogowany']))
         while ($row = $rezultat->fetch_assoc()) {
             echo "<li><strong>Tytul:</strong> ". $row['tytul'] . "</li>";
             echo "<li><strong>Autor:</strong> " . $row['autor'] . "</li>";
+            echo "<li><strong>Gatunek:</strong> " . $row['gatunek'] . "</li>";
             echo "<li><strong>Data wypozyczenia:</strong> " . $row['data_wypozyczenia'] . "</li>";
             echo "<li><strong>Data zwrotu:</strong> " . $row['data_zwrotu'] . "</li>";
             echo "<br>";
@@ -41,6 +42,8 @@ if (!isset($_SESSION['zalogowany']))
         echo "Brak wypozyczonych ksiazek dla tego uzytkownika.";
         echo '[ <a href="ksiegarnia.php">Powrót</a> ]</p>';
     }
+
+    $polaczenie->close();
 
 ?>
 

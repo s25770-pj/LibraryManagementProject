@@ -115,7 +115,7 @@
 				
 				if ($wszystko_OK==true)
 				{
-					//Hurra, wszystkie testy zaliczone, dodajemy uzytkownika do bazy
+					//Wszystkie testy zaliczone, dodajemy uzytkownika do bazy
 					
 					if ($polaczenie->query("INSERT INTO uzytkownicy VALUES (NULL, '$nick', '$haslo_hash', '$email', 0)"))
 					{

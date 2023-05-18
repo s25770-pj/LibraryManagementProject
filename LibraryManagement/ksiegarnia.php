@@ -29,6 +29,7 @@
 	echo '<p>[ <a href="adminpanel.php">Panel administratora</a> ]</p>';
 
 	}
+	echo '<p>[ <a href="wypozycz.php">Wypożyć książkę</a> ]</p>';
 	echo '<p>[ <a href="wypozyczenia.php">Historia wypozyczen!</a> ]</p>';
 	
 	
