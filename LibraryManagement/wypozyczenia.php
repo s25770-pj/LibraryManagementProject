@@ -2,6 +2,8 @@
 
 session_start();
 
+require_once 'session_timeout.php';
+
 if (!isset($_SESSION['zalogowany']))
 	{
 		header('Location: index.php');

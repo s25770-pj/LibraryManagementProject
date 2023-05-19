@@ -7,6 +7,8 @@
 		header('Location: index.php');
 		exit();
 	}
+
+	require_once 'session_timeout.php';
 	
 ?>
 <!DOCTYPE HTML>

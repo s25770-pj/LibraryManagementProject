@@ -1,6 +1,8 @@
 <?php
 
 	session_start();
+
+	require_once 'session_timeout.php';
 	
 	if ((isset($_SESSION['zalogowany'])) && ($_SESSION['zalogowany']==true))
 	{
