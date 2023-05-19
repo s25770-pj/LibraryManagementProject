@@ -1,8 +1,6 @@
 <?php
 
 	session_start();
-
-	require_once 'session_timeout.php';
 	
 	if (!isset($_SESSION['udanarejestracja']))
 	{
