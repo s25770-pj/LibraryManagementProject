@@ -43,7 +43,7 @@
 					
 					unset($_SESSION['blad']);
 					$rezultat->free_result();
-					header('Location: ksiegarnia.php');
+					header('Location: userpanel.php');
 				}
 				else 
 				{

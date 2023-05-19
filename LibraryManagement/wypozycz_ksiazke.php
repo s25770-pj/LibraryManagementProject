@@ -51,6 +51,7 @@ if ($result->num_rows > 0) {
         echo '<br />';
     }
     echo '</ul>';
+    echo '<p>[ <a href="userpanel.php">Powrót</a> ]</p>';
 } else {
     echo 'Brak książek w bazie danych.';
 }

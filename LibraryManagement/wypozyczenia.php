@@ -34,13 +34,13 @@ if (!isset($_SESSION['zalogowany']))
             echo "<li><strong>Data wypozyczenia:</strong> " . $row['data_wypozyczenia'] . "</li>";
             echo "<li><strong>Data zwrotu:</strong> " . $row['data_zwrotu'] . "</li>";
             echo "<br>";
-            echo '[ <a href="ksiegarnia.php">Powrót</a> ]</p>';
+            echo '[ <a href="userpanel.php">Powrót</a> ]</p>';
         }
 
         echo "</ul>";
     } else {
         echo "Brak wypozyczonych ksiazek dla tego uzytkownika.";
-        echo '[ <a href="ksiegarnia.php">Powrót</a> ]</p>';
+        echo '[ <a href="userpanel.php">Powrót</a> ]</p>';
     }
 
     $polaczenie->close();
