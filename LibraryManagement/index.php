@@ -16,9 +16,15 @@
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<title>Księgarnia internetowa</title>
+
+	<link rel="stylesheet" href="style.css">
+
 </head>
 
 <body>
+<div class = 'banner'>
+        gdfgdfgfdgfdgfdgg
+</div> <!-- banner -->
 	
 	<a href="rejestracja.php">Rejestracja - załóż darmowe konto!</a>
 	<br /><br />
