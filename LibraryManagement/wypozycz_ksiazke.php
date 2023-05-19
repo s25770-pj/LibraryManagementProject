@@ -42,16 +42,15 @@ if ($result->num_rows > 0) {
         echo '<strong>Gatunek:</strong> ' . $row['gatunek'] . '<br />';
         echo '<strong>Rodzaj:</strong> ' . $row['rodzaj'] . '<br />';
         echo '<strong>Cena:</strong> ' . $row['cena'] . '<br />';
-        echo '<strong>Opis:</strong> ' . $row['opis'] . '<br />';
-        echo '<form>';
-        echo '<input type = "hidden" name = "book_id" value = "' . $row ['id'] . '">';
-        echo '<input type = "button" name = "wypozycz" value = "Wypożycz"';
+        echo '<form action = "szczegoly_ksiazki.php" method = "POST">';
+        echo '<input type="hidden" name="id_ksiazki" value="' . $row['id'] . '">';
+        echo '<input type="submit" name="szczegoly" value="Szczegóły">';
         echo '</form>';
         echo '</li>';
         echo '<br />';
     }
     echo '</ul>';
-    echo '<p>[ <a href="userpanel.php">Powrót</a> ]</p>';
+    echo '<p>[ <a href="userpanel.php"> Powrót </a> ]</p>';
 } else {
     echo 'Brak książek w bazie danych.';
 }

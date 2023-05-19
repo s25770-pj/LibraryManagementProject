@@ -1,0 +1,106 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+
+.body {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 0;
+    margin: 0;
+}
+
+.srodek {
+    display: flex;
+    flex-wrap: wrap;
+    width: 60%;
+}
+
+.lewa, .prawa{
+    display: flex;
+    width: 20%;
+    margin: 0;
+}
+
+.lewa {
+    align-items: flex-start;
+    background-color: red;
+}
+
+.prawa {
+    align-items: flex-end;
+    background-color: orange;
+}
+
+.banner, .pod_bannerem {
+    display: flex;
+    flex-wrap: wrap;
+    box-sizing: border-box;
+}
+
+.banner {
+    background-color: blue;
+    width: 100%;
+    height: 10vh;
+}
+
+.pod_bannerem {
+    height: 100vh;
+    width: 100%;
+
+}
+
+.zdjecie, .info{
+    min-width: 50%;
+    min-height: 50vh;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    padding-top: 20px;
+}
+
+.zdjecie {
+    justify-content: flex-end;
+    align-items: top;
+    padding: 5%;
+    background-color: green;
+}
+
+.info {
+    background-color: aquamarine;
+}
+
+.info table {
+    border-collapse: collapse;
+    margin: 0 auto;
+  }
+
+.opis {
+    justify-content: flex-end;
+    background-color: yellow;
+    padding: 2%;
+    align-items: center;
+    width: 100%;
+}
+
+.opis table {
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.wypozycz {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    background-color: yellowgreen;
+}
+
+
+input[type="submit"] {
+    margin-top: 15px;
+}
+
+td{
+    padding: 6px;
+  }
