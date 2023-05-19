@@ -2,6 +2,8 @@
 
 session_start();
 
+require_once 'session_timeout.php';
+
 ?>
 
 <!DOCTYPE html>

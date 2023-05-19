@@ -8,6 +8,10 @@
 		exit();
 	}
 
+<<<<<<< HEAD
+=======
+	require_once 'session_timeout.php';
+>>>>>>> 149d04e1c4ab98e6e837f206cafdfbfb120cf494
 	
 ?>
 <!DOCTYPE HTML>
