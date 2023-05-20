@@ -1,5 +1,10 @@
+<?php
 
-<link rel="stylesheet" href="style.css">
+session_start();
+
+?>
+
+<link rel="stylesheet" href="../Style/style.css">
 
 <div class = 'body'>
 
@@ -17,9 +22,7 @@
 
 <?php
 
-session_start();
-
-require_once 'connect.php';
+require_once '../Laczenie_Z_Baza/connect.php';
 
 $polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
 
@@ -64,7 +67,7 @@ if(isset($_POST['id_ksiazki'])){
             echo '<input type = "hidden" name = "id_transakcji" value ="' . $row['id'] . '">';
             echo '<input type = "submit" name = "wypozycz" value = "Wypożycz">';
             echo '</form>';
-            echo '<p>[ <a href = "wypozycz_ksiazke.php"> Powrót </a> ]</p>';
+            echo '<p>[ <a href = "index.php"> Powrót </a> ]</p>';
             echo '</div>'; //finalizacja
             echo '</div>'; //srodek
             echo '<div class = "prawa">';

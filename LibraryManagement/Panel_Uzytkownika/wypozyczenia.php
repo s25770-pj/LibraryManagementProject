@@ -2,15 +2,13 @@
 
 session_start();
 
-require_once 'session_timeout.php';
-
 if (!isset($_SESSION['zalogowany']))
 	{
-		header('Location: index.php');
+		header('Location: ../Ksiazki/index.php');
 		exit();
 	}
 
-    require_once "connect.php";
+    require_once "../Laczenie_Z_Baza/connect.php";
 
     $polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
 

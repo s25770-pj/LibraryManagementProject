@@ -1,29 +1,71 @@
 <?php
 
-session_start();
+	session_start();
 
-if (!isset($_SESSION['zalogowany']))
+?>
+
+<!DOCTYPE HTML>
+<html lang="pl">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<title>Księgarnia internetowa</title>
+
+	<link rel="stylesheet" href="../Style/style.css">
+</head>
+
+<body>
+<div class = 'body'>
+
+<div class = 'banner'>
+
+<?php
+
+?>
+
+<?php 
+
+
+if ((!isset($_SESSION['zalogowany'])))
+
 	{
-		header('Location: index.php');
-		exit();
+
+	echo '<div class = "logowanie">';
+
+	echo '<p>[ <a class = "p" href="../Logowanie_Rejestracja/panel_logowania.php">Logowanie</a> ]</p>';
+		
+	echo '</div>'; //logowanie
+
+	echo '<div class = "rejestracja">';
+
+	echo '<p>[ <a href="../Logowanie_Rejestracja/rejestracja.php">Rejestracja</a> ]</p>';
+
+	echo '</div>'; //rejestracja
+
+	}
+
+	if(isset($_SESSION['zalogowany']))
+	{
+
+		echo '<p>[ <a href="../Panel_Uzytkownika/userpanel.php">Profil</a> ]</p>';
+
+
 	}
 
 ?>
 
-<!DOCTYPE html>
-<html lang="pl">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Wypożycz Książkę</title>
+</div> <!-- banner -->
 
-</head>
-<body>
+<div class = "pod_bannerem">
+
+<div class = 'lewa'>
+</div> <!-- lewa -->
+
+<div class = 'srodek'>
 
 <?php
 
-require_once "connect.php";
+require_once "../Laczenie_Z_Baza/connect.php";
 
 $polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
 if ($polaczenie->connect_errno) {
@@ -50,13 +92,29 @@ if ($result->num_rows > 0) {
         echo '<br />';
     }
     echo '</ul>';
-    echo '<p>[ <a href="userpanel.php"> Powrót </a> ]</p>';
 } else {
     echo 'Brak książek w bazie danych.';
 }
 
+
 $polaczenie->close();
 
+
+?>
+
+
+             </div> <!--srodek-->
+             <div class = "prawa">
+             </div> <!--prawa-->  
+
+</div> <!-- podbannerem-->
+</div> <!-- body -->
+	
+	<br /><br />
+<?php
+
+
+	if(isset($_SESSION['blad']))	echo $_SESSION['blad'];
 ?>
 
 </body>

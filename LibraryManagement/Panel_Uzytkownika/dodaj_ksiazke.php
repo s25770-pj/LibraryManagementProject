@@ -65,7 +65,7 @@ $buttonOut  = $_POST['rodzaj'];
 
 }
 
-require_once "connect.php";
+require_once "../Laczenie_Z_Baza/connect.php";
 
 $polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
 if ($polaczenie->connect_errno) {

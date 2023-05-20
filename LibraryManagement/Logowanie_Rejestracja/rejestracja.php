@@ -58,7 +58,7 @@
 		}				
 		
 		//Bot or not?
-		$sekret = "PODAJ WŁASNY SEKRET!";
+		$sekret = "6Le75SQmAAAAAIcJxQeeNxHMuCRhaf-Pqq4uYyTd";
 		
 		$sprawdz = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$sekret.'&response='.$_POST['g-recaptcha-response']);
 		
@@ -77,7 +77,7 @@
 		$_SESSION['fr_haslo2'] = $haslo2;
 		if (isset($_POST['regulamin'])) $_SESSION['fr_regulamin'] = true;
 		
-		require_once "connect.php";
+		require_once "../Laczenie_Z_Baza/connect.php";
 		mysqli_report(MYSQLI_REPORT_STRICT);
 		
 		try 
@@ -117,7 +117,7 @@
 				{
 					//Wszystkie testy zaliczone, dodajemy uzytkownika do bazy
 					
-					if ($polaczenie->query("INSERT INTO uzytkownicy VALUES (NULL, '$nick', '$haslo_hash', '$email', 0)"))
+					if ($polaczenie->query("INSERT INTO uzytkownicy VALUES (NULL, 'user', '$nick', '$haslo_hash', '$email', now())"))
 					{
 						$_SESSION['udanarejestracja']=true;
 						header('Location: witamy.php');
@@ -240,7 +240,7 @@
 			}
 		?>	
 		
-		<div class="g-recaptcha" data-sitekey="PODAJ WŁASNY SITEKEY!"></div>
+		<div class="g-recaptcha" data-sitekey="6Le75SQmAAAAAODMcVX5bJwA2z6ko-h0bs4LfJTn"></div>
 		
 		<?php
 			if (isset($_SESSION['e_bot']))
@@ -253,6 +253,8 @@
 		<br />
 		
 		<input type="submit" value="Zarejestruj się" />
+
+		<p>[ <a href="../Ksiazki/index.php">Powrót</a> ]</p>
 		
 	</form>
 

@@ -4,11 +4,11 @@
 	
 	if ((!isset($_POST['login'])) || (!isset($_POST['haslo'])))
 	{
-		header('Location: index.php');
+		header('Location: ../Ksiazki/index.php');
 		exit();
 	}
 
-	require_once "connect.php";
+	require_once "../Laczenie_Z_Baza/connect.php";
 
 	$polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
 	
@@ -43,18 +43,18 @@
 					
 					unset($_SESSION['blad']);
 					$rezultat->free_result();
-					header('Location: userpanel.php');
+					header('Location: ../Ksiazki/index.php');
 				}
 				else 
 				{
 					$_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
-					header('Location: index.php');
+					header('Location: panel_logowania.php');
 				}
 				
 			} else {
 				
 				$_SESSION['blad'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
-				header('Location: index.php');
+				header('Location: panel_logowania.php');
 				
 			}
 			

@@ -2,6 +2,12 @@
 
 session_start();
 
+if (isset($_SESSION['zalogowany']))
+	{
+		header('Location: ../Ksiazki/index.php');
+		exit();
+	}
+
 ?>
 
 <!DOCTYPE html>
@@ -19,7 +25,7 @@ session_start();
     Hasło: <br /> <input type="password" name="haslo" /> <br /><br />
     <input type="submit" value="Zaloguj się" />
 
-    <p>[ <a href="index.php">Powrót</a> ]</p>
+    <p>[ <a href="../Ksiazki/index.php">Powrót</a> ]</p>
 
 </form>
     

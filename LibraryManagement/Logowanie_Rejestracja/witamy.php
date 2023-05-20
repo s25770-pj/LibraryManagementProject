@@ -4,7 +4,7 @@
 	
 	if (!isset($_SESSION['udanarejestracja']))
 	{
-		header('Location: index.php');
+		header('Location: ../Ksiazki/index.php');
 		exit();
 	}
 	else
@@ -40,7 +40,7 @@
 	
 	Dziękujemy za rejestrację w serwisie! Możesz już zalogować się na swoje konto!<br /><br />
 	
-	<a href="index.php">Zaloguj się na swoje konto!</a>
+	<a href="../Ksiazki/index.php">Zaloguj się na swoje konto!</a>
 	<br /><br />
 
 </body>
