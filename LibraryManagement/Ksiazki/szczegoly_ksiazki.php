@@ -63,12 +63,12 @@ if(isset($_POST['id_ksiazki'])){
             echo '</div>'; //opis
 
             echo '<div class = "wypozycz">';
-            echo '<form action = "finalizacja.php" method = "POST">';
-            echo '<input type = "hidden" name = "id_transakcji" value ="' . $row['id'] . '">';
+            echo '<form action = "wypozyczenie.php" method = "POST">';
+            echo '<input type = "hidden" name = "id_ksiazki" value ="' . $row['id'] . '">';
             echo '<input type = "submit" name = "wypozycz" value = "Wypożycz">';
             echo '</form>';
             echo '<p>[ <a href = "index.php"> Powrót </a> ]</p>';
-            echo '</div>'; //finalizacja
+            echo '</div>'; //wypozycz
             echo '</div>'; //srodek
             echo '<div class = "prawa">';
             echo 'PRAWA';

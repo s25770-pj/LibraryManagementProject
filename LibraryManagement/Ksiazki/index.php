@@ -100,15 +100,7 @@ if ($result->num_rows > 0) {
 $polaczenie->close();
 
 
-?>
-
-
-             </div> <!--srodek-->
-             <div class = "prawa">
-             </div> <!--prawa-->  
-
-</div> <!-- podbannerem-->
-</div> <!-- body -->
+?> 
 	
 	<br /><br />
 <?php
@@ -116,6 +108,11 @@ $polaczenie->close();
 
 	if(isset($_SESSION['blad']))	echo $_SESSION['blad'];
 ?>
+</div> <!--srodek-->
+             <div class = "prawa">
+             </div> <!--prawa-->  
+</div> <!-- podbannerem-->
+</div> <!-- body -->
 
 </body>
 </html>
