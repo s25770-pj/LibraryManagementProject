@@ -69,7 +69,7 @@ if(isset($_POST['id_ksiazki'])){
             echo '</div>'; //srodek
             echo '<div class = "prawa">';
             echo 'PRAWA';
-            echo '</div>'; //prawa //10, 
+            echo '</div>'; //prawa  
 
         }
     }

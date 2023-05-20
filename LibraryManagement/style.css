@@ -39,7 +39,7 @@ body {
 }
 
 .banner {
-    background-color: lightblue;
+    border: solid blue 5px;
     width: 100%;
     height: 10vh;
 }
@@ -104,3 +104,4 @@ input[type="submit"] {
 td{
     padding: 6px;
   }
+
