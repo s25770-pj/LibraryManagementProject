@@ -46,7 +46,7 @@ if (isset($_POST["execute"])){
 
         if($updateRezultat->execute()) {
 
-            header('Location: premium.php');
+            header('Location: pakiety_premium.php');
 
         } else {
 
@@ -67,5 +67,7 @@ if (isset($_POST["execute"])){
     $polaczenie->close();
 
     unset($_POST["execute"]);
+} else {
+    header('Location: pakiety_premium.php');
 }
 ?>

@@ -45,7 +45,7 @@ if($dataczas<$koniec) {
 
 	}
 	echo '<p>[ <a href="wypozyczenia.php">Historia wypozyczen!</a> ]</p>';
-	echo '<p>[ <a href="premium.php">Kup karnet premium</a> ]</p>';
+	echo '<p>[ <a href="pakiety_premium.php">Kup karnet premium</a> ]</p>';
 	echo '<p>[ <a href="../Ksiazki/index.php">Powrót</a> ]</p>';
 	
 ?>

@@ -17,10 +17,14 @@ if (!isset($_SESSION['zalogowany']))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kup Karnet Premium</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="../JS/script.js"></script>
 </head>
 <body>
 
     <?php 
+
+    //Kupno premium 15 dni
 
     echo 'Długość trwania: 15 dni <br />';
     echo 'Cena: 20zł <br />';
@@ -31,8 +35,8 @@ if (!isset($_SESSION['zalogowany']))
 
     $id = $_SESSION['id'];
 
-    echo 'id: ' . $id . '<br />';
-    
+    //Data i czas serwera
+
     $dataczas = new DateTime(date('Y-m-d H:i:s'));
 
     echo "Data i czas serwera: " . $dataczas->format('Y-m-d H:i:s') . "<br>";
@@ -45,6 +49,8 @@ if (!isset($_SESSION['zalogowany']))
 		echo "Error: ".$polaczenie->connect_errno;
 	}
 
+    //Pobranie daty konca premium dla zalogowanego uzytkownika
+    
     $query = "SELECT dnipremium FROM uzytkownicy WHERE id = '$id' ";
     $rezultat = $polaczenie->query($query);
     $row = $rezultat->fetch_assoc();
@@ -53,16 +59,20 @@ if (!isset($_SESSION['zalogowany']))
 
     echo 'Data wygasniecia: ' . $_SESSION['dnipremium'] . '<br />';
 
+    //Czas do końca premium
+
     $koniec = DateTime::createFromFormat('Y-m-d H:i:s', $_SESSION['dnipremium']);
     $roznica = $dataczas->diff($koniec);
 
+    echo '<div id = "counter">';
+
     if($dataczas<$koniec) {
 
-	    echo "Pozostay czas premium: " . $roznica->format('%y lat, %m mies, %d dni, %h godz, %i min, %s sek');
+	    echo "Pozostały czas pakietu premium: <br />" . $roznica->format('%y lat, %m mies, %d dni, %h godz, %i min, %s sek');
 
     } else {
 
-	echo "Premium nieaktywne od: " . $roznica->format('%y lat, %m mies, %d dni, %h godz, %i min, %s sek');
+	echo "Pakiet premium nieaktywne.";
 
 }
 
