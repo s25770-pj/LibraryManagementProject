@@ -19,7 +19,7 @@ if (!isset($_SESSION['zalogowany']))
     $userID = $_SESSION['id'];
 
     $query = "SELECT inwentarz.tytul, inwentarz.autor, inwentarz.gatunek, wypozyczenia.data_wypozyczenia, wypozyczenia.data_zwrotu
-    FROM wypozyczenia INNER JOIN inwentarz ON wypozyczenia.id_inwentarz = inwentarz.id WHERE wypozyczenia.id_uzytkownika = $userID";
+    FROM wypozyczenia INNER JOIN inwentarz ON wypozyczenia.id_ksiazki = inwentarz.id WHERE wypozyczenia.id_uzytkownika = $userID";
 
     $rezultat = $polaczenie->query($query);
 

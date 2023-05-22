@@ -117,10 +117,33 @@
 				{
 					//Wszystkie testy zaliczone, dodajemy uzytkownika do bazy
 					
-					if ($polaczenie->query("INSERT INTO uzytkownicy VALUES (NULL, 'user', '$nick', '$haslo_hash', '$email', now())"))
+					if ($polaczenie->query("INSERT INTO uzytkownicy (dostep, user, pass, email, dnipremium) VALUES ('user', '$nick', '$haslo_hash', '$email', now())"))
 					{
+						$uzytkownik_id = $polaczenie->insert_id;
+
+						//Dodanie potrfela przypisanego do uzytkownika do bazy
+
+						if ($polaczenie->query("INSERT INTO portfele (id_uzytkownika, saldo, ostatnia_aktualizacja) VALUES ('$uzytkownik_id', 0.00, now())")){
+							$portfel_id = $polaczenie->insert_id;
+
+							//Aktualizacja użytkownika o ID portfela
+
+							if ($polaczenie->query("UPDATE uzytkownicy SET id_portfela = '$portfel_id' WHERE id = '$uzytkownik_id'")) {
+
 						$_SESSION['udanarejestracja']=true;
 						header('Location: witamy.php');
+
+							} else {
+
+								throw new Exception($polaczenie->error);
+
+							}
+
+						} else {
+
+							throw new Exception($polaczenie->error);
+
+						}
 					}
 					else
 					{

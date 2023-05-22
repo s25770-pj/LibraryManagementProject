@@ -2,6 +2,8 @@
 
 session_start();
 
+if(isset($_GET['id_ksiazki'])){
+
 ?>
 
 <link rel="stylesheet" href="../Style/style.css">
@@ -30,8 +32,7 @@ if ($polaczenie->connect_errno) {
     exit("Błąd połączenia z bazą danych: " . $polaczenie->connect_errno);
 }
 
-if(isset($_POST['id_ksiazki'])){
-    $ksiazkaid = $_POST['id_ksiazki'];
+    $ksiazkaid = $_GET['id_ksiazki'];
 
     $query = "SELECT * FROM inwentarz WHERE id = $ksiazkaid ";
 
@@ -62,20 +63,30 @@ if(isset($_POST['id_ksiazki'])){
             echo '</table>';
             echo '</div>'; //opis
 
+            if($_SESSION['saldo'] > $row['cena']){
             echo '<div class = "wypozycz">';
-            echo '<form action = "wypozyczenie.php" method = "POST">';
+            echo '<form action = "wypozyczenie.php" method = "GET">';
             echo '<input type = "hidden" name = "id_ksiazki" value ="' . $row['id'] . '">';
             echo '<input type = "submit" name = "wypozycz" value = "Wypożycz">';
             echo '</form>';
+            } else {
+                echo '<div class = "wypozycz">';
+                echo '<form>';
+                echo '<input type = "submit" name = "wypozycz" value = "Wypożycz" title = "nie masz wystarczająco yang">';
+                echo '</form>';
+            }
             echo '<p>[ <a href = "index.php"> Powrót </a> ]</p>';
             echo '</div>'; //wypozycz
             echo '</div>'; //srodek
             echo '<div class = "prawa">';
             echo 'PRAWA';
             echo '</div>'; //prawa  
+            echo '</div>'; //podbannerem
+            echo '</div>'; //body
 
         }
     }
+    $polaczenie->close();
 
 } else {
 
@@ -83,8 +94,4 @@ if(isset($_POST['id_ksiazki'])){
 
 }
 
-$polaczenie->close();
-
 ?>
-</div> <!-- podbannerem-->
-</div> <!-- body -->

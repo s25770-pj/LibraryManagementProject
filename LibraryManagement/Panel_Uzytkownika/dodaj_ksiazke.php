@@ -109,15 +109,17 @@ if(isset($_POST['rodzaj'])) {
                 echo "Wszystkie pola formularza są wymagane.";
         } else {
 
-        $insertQuery = "INSERT INTO inwentarz (id, tytul, autor, gatunek, rodzaj, cena, opis) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $insertQuery = "INSERT INTO inwentarz (id, tytul, autor, gatunek, rodzaj, cena, opis) VALUES (NULL, ?, ?, ?, ?, ?, ?)";
         $insertStmt = $polaczenie->prepare($insertQuery);
-        $insertStmt->bind_param("sssssss", $id, $tytul, $autor, $gatunek, $rodzaj, $cena, $opis);
+        $insertStmt->bind_param("ssssss", $tytul, $autor, $gatunek, $rodzaj, $cena, $opis);
 
         if($insertStmt->execute()) {
             echo "Książka została dodana do oferty księgarni.";
         } else {
             echo "Błąd zapytania: " . $polaczenie->error;
         }
+
+        $res->close();
 
         $insertStmt->close();
 

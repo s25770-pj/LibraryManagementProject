@@ -19,12 +19,26 @@
 
 <div class = 'banner'>
 
-<?php
-
-?>
-
 <?php 
 
+require_once "../Laczenie_Z_Baza/connect.php";
+
+$polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
+
+if ($polaczenie->connect_errno) {
+    exit("Błąd połączenia z bazą danych: " . $polaczenie->connect_errno);
+}
+
+$id = $_SESSION['id'];
+$jakie_saldo = "SELECT saldo FROM portfele WHERE id_uzytkownika = '$id'";
+$rezultat = $polaczenie->query($jakie_saldo);
+
+if($rezultat) {
+    if($rezultat->num_rows > 0 ) {
+        $row = $rezultat->fetch_assoc();
+        $_SESSION['saldo'] = $row['saldo'];
+    }
+}
 
 if ((!isset($_SESSION['zalogowany'])))
 
@@ -47,8 +61,9 @@ if ((!isset($_SESSION['zalogowany'])))
 	if(isset($_SESSION['zalogowany']))
 	{
 
+        $saldo = $_SESSION['saldo'];
 		echo '<p>[ <a href="../Panel_Uzytkownika/userpanel.php">Profil</a> ]</p>';
-
+        echo '<p>[ <a href="../Panel_Uzytkownika/userpanel.php">' . $saldo . 'zł</a> ]</p>';
 
 	}
 
@@ -65,13 +80,6 @@ if ((!isset($_SESSION['zalogowany'])))
 
 <?php
 
-require_once "../Laczenie_Z_Baza/connect.php";
-
-$polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
-if ($polaczenie->connect_errno) {
-    exit("Błąd połączenia z bazą danych: " . $polaczenie->connect_errno);
-}
-
 $query = "SELECT * FROM inwentarz";
 $result = $polaczenie->query($query);
 
@@ -84,7 +92,7 @@ if ($result->num_rows > 0) {
         echo '<strong>Gatunek:</strong> ' . $row['gatunek'] . '<br />';
         echo '<strong>Rodzaj:</strong> ' . $row['rodzaj'] . '<br />';
         echo '<strong>Cena:</strong> ' . $row['cena'] . '<br />';
-        echo '<form action = "szczegoly_ksiazki.php" method = "POST">';
+        echo '<form action = "szczegoly_ksiazki.php" method = "GET">';
         echo '<input type="hidden" name="id_ksiazki" value="' . $row['id'] . '">';
         echo '<input type="submit" name="szczegoly" value="Szczegóły">';
         echo '</form>';
