@@ -11,7 +11,16 @@ if(isset($_GET['id_ksiazki'])){
 <div class = 'body'>
 
 <div class = 'banner'>
-        dfsfsdf
+
+<?php
+
+    $saldo = $_SESSION['saldo'];
+    
+    echo '<p>[ <a href="../Panel_Uzytkownika/userpanel.php">Profil</a> ]</p>';
+    echo '<p>[ <a href="../Panel_Uzytkownika/userpanel.php">' . $saldo . 'zł</a> ]</p>';
+
+    ?>
+
 </div> <!-- banner -->
 
 <div class = "pod_bannerem">

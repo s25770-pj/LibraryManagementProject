@@ -40,6 +40,7 @@
 					$_SESSION['email'] = $wiersz['email'];
 					$_SESSION['dnipremium'] = $wiersz['dnipremium'];
 					$_SESSION['dostep'] = $wiersz['dostep'];
+					$_SESSION['id_portfela'] = $wiersz['id_portfela'];
 					
 					unset($_SESSION['blad']);
 					$rezultat->free_result();

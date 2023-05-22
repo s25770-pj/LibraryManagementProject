@@ -29,6 +29,7 @@ if (!isset($_SESSION['zalogowany']))
     echo 'Długość trwania: 15 dni <br />';
     echo 'Cena: 20zł <br />';
     echo '<form action = "zakup_premium.php" method = "POST">';
+    echo '<input type="hidden" name="cena_pakietu" value="20">';
     echo '<input type="submit" name="execute" value="Kup pakiet">';
     echo '</form>';
     echo '[ <a href="userpanel.php">Powrót</a> ]</p>';
