@@ -10,7 +10,7 @@
 
 	require_once "../Laczenie_Z_Baza/connect.php";
 
-	$polaczenie = @new mysqli($host, $db_user, $db_password, $db_name);
+	$polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
 	
 	if ($polaczenie->connect_errno!=0)
 	{
@@ -23,7 +23,7 @@
 		
 		$login = htmlentities($login, ENT_QUOTES, "UTF-8");
 	
-		if ($rezultat = @$polaczenie->query(
+		if ($rezultat = $polaczenie->query(
 		sprintf("SELECT * FROM uzytkownicy WHERE user='%s'",
 		mysqli_real_escape_string($polaczenie,$login))))
 		{

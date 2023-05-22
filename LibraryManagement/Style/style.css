@@ -61,7 +61,6 @@ body {
     box-sizing: border-box;
     display: flex;
     align-items: center;
-    padding-top: 20px;
 }
 
 .zdjecie {
@@ -94,23 +93,45 @@ body {
 }
 
 .wypozycz {
+    position: relative;
     display: flex;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     width: 100%;
     border: solid yellowgreen 5px;
+    flex-direction: column;
 }
 
+.wypozycz form {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+}
+
+.wypozycz p {
+    display: flex;
+    width: 100%;
+    justify-content: center;
+  }
 
 input[type="submit"] {
     margin-top: 15px;
+    box-shadow: 3px 3px 3px gray;
 }
 
 td {
     padding: 6px;
   }
 
-  div p {
-    margin-right: 25px;
-  }
+.przycisk {
+    font-weight: bold;
+    font-size: medium;
+    font-family: Arial, Helvetica, sans-serif;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+}
+
+
 

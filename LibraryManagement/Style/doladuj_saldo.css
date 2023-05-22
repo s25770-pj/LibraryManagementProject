@@ -1,0 +1,11 @@
+.srodek {
+padding: 5%;
+justify-content: space-around;
+}
+
+.przycisk {
+    background-color: lightblue;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+}

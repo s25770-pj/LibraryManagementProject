@@ -63,16 +63,44 @@ if ($polaczenie->connect_errno) {
             echo '</table>';
             echo '</div>'; //opis
 
-            if($_SESSION['saldo'] > $row['cena']){
+            $cena = $row['cena'];
+            $ksiazkaid = $row['id'];
+            $data_konca = date('Y-m-d H:i:s');
+            $id_uzytkownika = $_SESSION['id'];
+
+            $czywypozyczona = "SELECT * FROM wypozyczenia WHERE id_uzytkownika = ? AND id_ksiazki = ? AND data_zwrotu > ?";
+            $querySelect = $polaczenie->prepare($czywypozyczona);
+            $querySelect->bind_param("iis", $id_uzytkownika, $ksiazkaid, $data_konca);
+            $querySelect->execute();
+            $rez = $querySelect->get_result();
+
+            if(($_SESSION['saldo'] > $row['cena']) && ($rez->num_rows < 1 )){
+
+            //Sprawdzenie czy uzytkownik ma wystarczające saldo
+
             echo '<div class = "wypozycz">';
-            echo '<form action = "wypozyczenie.php" method = "GET">';
+            echo '<form action = "wypozyczenie_ksiazki.php" method = "POST">';
             echo '<input type = "hidden" name = "id_ksiazki" value ="' . $row['id'] . '">';
-            echo '<input type = "submit" name = "wypozycz" value = "Wypożycz">';
+            echo '<input type = "hidden" name = "cena_ksiazki" value ="' . $cena . '">';
+            echo '<input type = "submit" name = "wypozycz" value = "Wypożycz" class = "przycisk">';
             echo '</form>';
+            } else if(($_SESSION['saldo'] > $row['cena']) && ($rez->num_rows > 0 )) {
+
+                //Sprawdzenie czy uzytkownik już wypożyczył tą książkę
+
+                echo '<div class = "wypozycz">';
+                echo '<form action = "../Panel_Uzytkownika/wypozyczenia.php" method = "GET">';
+                echo '<input type = "hidden" name = "id_ksiazki" value ="' . $ksiazkaid . '">';
+                echo '<input type = "hidden" name = "cena_ksiazki" value ="' . $row['cena'] . '">';
+                echo '<input type = "submit" name = "wypozyczona" value = "Książka została już przez Ciebie wypożyczona" class = "przycisk">';
+                echo '</form>';
+
             } else {
                 echo '<div class = "wypozycz">';
-                echo '<form>';
-                echo '<input type = "submit" name = "wypozycz" value = "Wypożycz" title = "nie masz wystarczająco yang">';
+                echo '<form action = "../Panel_Uzytkownika/wypozyczenia.php" method = "GET">';
+                echo '<input type = "hidden" name = "id_ksiazki" value ="' . $ksiazkaid . '">';
+                echo '<input type = "hidden" name = "cena_ksiazki" value ="' . $row['cena'] . '">';
+                echo '<input type = "submit" name = "doladuj" value = "Doładuj saldo" class = "przycisk">';
                 echo '</form>';
             }
             echo '<p>[ <a href = "index.php"> Powrót </a> ]</p>';
@@ -84,8 +112,11 @@ if ($polaczenie->connect_errno) {
             echo '</div>'; //podbannerem
             echo '</div>'; //body
 
+            $rez->close();
+
         }
     }
+    $rezultat->close();
     $polaczenie->close();
 
 } else {

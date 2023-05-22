@@ -29,17 +29,6 @@ if ($polaczenie->connect_errno) {
     exit("Błąd połączenia z bazą danych: " . $polaczenie->connect_errno);
 }
 
-$id = $_SESSION['id'];
-$jakie_saldo = "SELECT saldo FROM portfele WHERE id_uzytkownika = '$id'";
-$rezultat = $polaczenie->query($jakie_saldo);
-
-if($rezultat) {
-    if($rezultat->num_rows > 0 ) {
-        $row = $rezultat->fetch_assoc();
-        $_SESSION['saldo'] = $row['saldo'];
-    }
-}
-
 if ((!isset($_SESSION['zalogowany'])))
 
 	{
@@ -60,6 +49,20 @@ if ((!isset($_SESSION['zalogowany'])))
 
 	if(isset($_SESSION['zalogowany']))
 	{
+
+    $id = $_SESSION['id'];
+    $jakie_saldo = "SELECT saldo FROM portfele WHERE id_uzytkownika = '$id'";
+    $rezultat = $polaczenie->query($jakie_saldo);
+
+    if($rezultat) {
+
+        if($rezultat->num_rows > 0 ) {
+        $row = $rezultat->fetch_assoc();
+        $_SESSION['saldo'] = $row['saldo'];
+
+    }
+}
+
 
         $saldo = $_SESSION['saldo'];
 		echo '<p>[ <a href="../Panel_Uzytkownika/userpanel.php">Profil</a> ]</p>';

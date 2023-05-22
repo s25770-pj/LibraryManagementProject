@@ -2,6 +2,12 @@
 
 session_start();
 
+if (!isset($_SESSION['zalogowany']))
+{
+	header('Location: index.php');
+	exit();
+}
+
 ?>
 
 <!DOCTYPE html>
@@ -68,6 +74,7 @@ $buttonOut  = $_POST['rodzaj'];
 require_once "../Laczenie_Z_Baza/connect.php";
 
 $polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
+
 if ($polaczenie->connect_errno) {
     exit("Błąd połączenia z bazą danych: ". $polaczenie->connect_errno);
 }

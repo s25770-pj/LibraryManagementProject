@@ -2,6 +2,12 @@
 
 session_start();
 
+if (!isset($_SESSION['zalogowany']))
+{
+	header('Location: index.php');
+	exit();
+}
+
 require_once '../Laczenie_Z_Baza/connect.php';
 
 $polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
