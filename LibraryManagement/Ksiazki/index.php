@@ -81,7 +81,16 @@ if ((!isset($_SESSION['zalogowany'])))
 
 <div class = 'wyszukiwanie'>
 
-<input type="text" id="searchPhrase" placeholder="Wyszukaj książkę lub autora" oninput="searchBooks()" class="wyszukaj_tekst">
+<label for="jakiGatunek"></label>
+<select id="jakiGatunek" oninput="searchBooks()" class = "wyszukaj_gatunek">
+    <option value="" selected>Wszystkie gatunki</option>
+    <option value="Thriller">Thriller</option>
+    <option value="Fantastyka">Fantastyka</option>
+    <option value="Akcja">Akcja</option>
+    <option value="Romans">Romans</option>
+</select>
+
+<input type="text" id="znajdzFraze" placeholder="Wyszukaj książkę lub autora" oninput="searchBooks()" class="wyszukaj_tekst">
 
 </div>
 

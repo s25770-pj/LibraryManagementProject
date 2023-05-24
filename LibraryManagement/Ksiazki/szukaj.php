@@ -7,20 +7,36 @@ $polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
 if ($polaczenie->connect_errno) {
     exit("Błąd połączenia z bazą danych: " . $polaczenie->connect_errno);
 }
+//Wyszukiwanie książki po wpisanej frazie
+if (isset($_GET['fraza']) && !empty($_GET['fraza']) && empty($_GET['gatunek'])) {
+    $fraza = $_GET['fraza'];
+    $gatunek = $_GET['gatunek'];
+    $query = "SELECT * FROM inwentarz WHERE tytul LIKE '%$fraza%' OR autor LIKE '%$fraza%'";
+//Po podanej frazie i gatunku
+} else if (isset($_GET['fraza']) && !empty($_GET['fraza']) && !empty($_GET['gatunek'])) {
+    
+    $fraza = $_GET['fraza'];
+    $gatunek = $_GET['gatunek'];
+    $query = "SELECT * FROM inwentarz WHERE (tytul LIKE '%$fraza%' OR autor LIKE '%$fraza%') AND gatunek = '$gatunek'";
+//Po podanym gatunku
+}else if (isset($_GET['gatunek']) && !empty($_GET['gatunek'])){ 
 
-if (isset($_GET['phrase']) && !empty($_GET['phrase'])) {
-    $phrase = $_GET['phrase'];
-    $query = "SELECT * FROM inwentarz WHERE tytul LIKE '%$phrase%' OR autor LIKE '%$phrase%'";
-} else {
-    $phrase = '';
+    $fraza = '';
+    $gatunek = $_GET['gatunek'];
+    $query = "SELECT * FROM inwentarz WHERE gatunek = '$gatunek'";
+//Kiedy nie podano ani frazy, ani gatunku
+}else {
+
+    $fraza = '';
+    $gatunek = '';
     $query = "SELECT * FROM inwentarz";
 }
 
-$result = $polaczenie->query($query);
+$rezultat = $polaczenie->query($query);
 
-if ($result->num_rows > 0 || empty($phrase)) {
+if ($rezultat->num_rows > 0 || empty($fraza) || empty($gatunek)) {
     echo '<ul>';
-    while ($row = $result->fetch_assoc()) {
+    while ($row = $rezultat->fetch_assoc()) {
         echo '<li>';
         echo '<strong>Tytuł:</strong> ' . $row['tytul'] . '<br />';
         echo '<strong>Autor:</strong> ' . $row['autor'] . '<br />';

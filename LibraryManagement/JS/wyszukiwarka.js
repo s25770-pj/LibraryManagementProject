@@ -4,7 +4,8 @@ window.addEventListener('DOMContentLoaded', function() {
   
 function searchBooks() {
 
-    var phrase = document.getElementById("searchPhrase").value;
+    var fraza = document.getElementById("znajdzFraze").value;
+    var gatunek = document.getElementById("jakiGatunek").value;
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -12,6 +13,6 @@ function searchBooks() {
             document.getElementById("bookResults").innerHTML = this.responseText;
         }
     };
-    xhttp.open("GET", "szukaj.php?phrase=" + phrase, true);
+    xhttp.open("GET", "szukaj.php?fraza=" + fraza + "&gatunek=" + gatunek, true);
     xhttp.send();
 }
