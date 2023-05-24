@@ -11,6 +11,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
 	<title>Księgarnia internetowa</title>
 
+    <script src="../JS/wyszukiwarka.js"></script>
 	<link rel="stylesheet" href="../Style/style.css">
 </head>
 
@@ -34,15 +35,11 @@ if ((!isset($_SESSION['zalogowany'])))
 	{
 
 	echo '<div class = "logowanie">';
-
 	echo '<p>[ <a class = "p" href="../Logowanie_Rejestracja/panel_logowania.php">Logowanie</a> ]</p>';
-		
 	echo '</div>'; //logowanie
-
+    
 	echo '<div class = "rejestracja">';
-
 	echo '<p>[ <a href="../Logowanie_Rejestracja/rejestracja.php">Rejestracja</a> ]</p>';
-
 	echo '</div>'; //rejestracja
 
 	}
@@ -63,10 +60,10 @@ if ((!isset($_SESSION['zalogowany'])))
     }
 }
 
-
+        //Przejście do portfela
         $saldo = $_SESSION['saldo'];
-		echo '<p>[ <a href="../Panel_Uzytkownika/userpanel.php">Profil</a> ]</p>';
-        echo '<p>[ <a href="../Panel_Uzytkownika/userpanel.php">' . $saldo . 'zł</a> ]</p>';
+		echo '<p>[ <a href="../Panel_Uzytkownika/panel_uzytkownika.php">Profil</a> ]</p>';
+        echo '<p>[ <a href="../Panel_Uzytkownika/doladuj_saldo.php">' . $saldo . 'zł</a> ]</p>';
 
 	}
 
@@ -74,42 +71,25 @@ if ((!isset($_SESSION['zalogowany'])))
 
 </div> <!-- banner -->
 
-<div class = "pod_bannerem">
+<div class = 'pod_bannerem'>
 
 <div class = 'lewa'>
+
 </div> <!-- lewa -->
 
 <div class = 'srodek'>
 
+<div class = 'wyszukiwanie'>
+
+<input type="text" id="searchPhrase" placeholder="Wyszukaj książkę lub autora" oninput="searchBooks()" class="wyszukaj_tekst">
+
+</div>
+
+<div id='bookResults'></div>
+
 <?php
 
-$query = "SELECT * FROM inwentarz";
-$result = $polaczenie->query($query);
-
-if ($result->num_rows > 0) {
-    echo '<ul>';
-    while ($row = $result->fetch_assoc()) {
-        echo '<li>';
-        echo '<strong>Tytuł:</strong> ' . $row['tytul'] . '<br />';
-        echo '<strong>Autor:</strong> ' . $row['autor'] . '<br />';
-        echo '<strong>Gatunek:</strong> ' . $row['gatunek'] . '<br />';
-        echo '<strong>Rodzaj:</strong> ' . $row['rodzaj'] . '<br />';
-        echo '<strong>Cena:</strong> ' . $row['cena'] . '<br />';
-        echo '<form action = "szczegoly_ksiazki.php" method = "GET">';
-        echo '<input type="hidden" name="id_ksiazki" value="' . $row['id'] . '">';
-        echo '<input type="submit" name="szczegoly" value="Szczegóły">';
-        echo '</form>';
-        echo '</li>';
-        echo '<br />';
-    }
-    echo '</ul>';
-} else {
-    echo 'Brak książek w bazie danych.';
-}
-
-
 $polaczenie->close();
-
 
 ?> 
 	

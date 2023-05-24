@@ -40,7 +40,7 @@ if (!isset($_SESSION['zalogowany']))
     } else {
         echo "Brak wypozyczonych ksiazek dla tego uzytkownika.";
     }
-    echo '[ <a href="userpanel.php">Powrót</a> ]</p>';
+    echo '[ <a href="panel_uzytkownika.php">Powrót</a> ]</p>';
 
     $polaczenie->close();
 

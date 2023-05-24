@@ -63,7 +63,7 @@ echo 'Cena: <input type = "number" name = "cena"> <br /><br />';
 echo 'Opis: <br /> <textarea name="opis" cols="35" rows="5">Tu wpisz tekst który pojawi się domyślnie</textarea> <br />';
 echo '<input type = "submit" value = "Dodaj ksiazke"> <br /><br />';
 echo '</form>';
-echo '[ <a href="userpanel.php">Powrót</a> ]</p>';
+echo '[ <a href="panel_uzytkownika.php">Powrót</a> ]</p>';
 
 if(isset($_POST['rodzaj'])){
 

@@ -8,6 +8,7 @@ body {
 .przycisk {
     background-color: lightblue;
     color: white;
+    cursor: pointer;
     padding: 10px 20px;
     border: none;
 }

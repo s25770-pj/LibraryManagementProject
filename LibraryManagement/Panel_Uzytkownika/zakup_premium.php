@@ -26,19 +26,30 @@ if (isset($_POST["execute"]) && (isset($_POST['cena_pakietu']))){
     //Sprawdzenie czy można dodać dni premium
 
     $query = "SELECT dnipremium FROM uzytkownicy WHERE id = ?";
-    $rezultat = $polaczenie->prepare($query);
-    $rezultat->bind_param("i", $id);
-    $rezultat->execute();
-    $rezultat->store_result();
-    $rezultat->bind_result($dnipremium);
+    $rezultatPremium = $polaczenie->prepare($query);
+    $rezultatPremium->bind_param("i", $id);
+    $rezultatPremium->execute();
+    $rezultatPremium->store_result();
+    $rezultatPremium->bind_result($dnipremium);
 
-    if($rezultat->fetch()){
+    if($rezultatPremium->fetch()){
 
     $aktualnaDataCzas = new DateTime($dnipremium);
     $aktualnaDataCzas->modify('+ 15 days');
     $nowaDataCzas = $aktualnaDataCzas->format('Y-m-d H:i:s');
 
     $dzis = new DateTime();
+
+    $jakieSaldo = "SELECT saldo FROM portfele WHERE id_uzytkownika = ? ";
+    $rezultatSaldo = $polaczenie->prepare($jakieSaldo);
+    $rezultatSaldo->bind_param("i", $id);
+    $rezultatSaldo->execute();
+    $rezultatSaldo->store_result();
+    $rezultatSaldo->bind_result($saldo);
+
+    if ($rezultatSaldo->fetch()) {
+
+    echo 'Saldo: ' . $saldo;
 
     if ($aktualnaDataCzas > $dzis) {
 
@@ -62,16 +73,18 @@ if (isset($_POST["execute"]) && (isset($_POST['cena_pakietu']))){
 
         $portfelId = $_SESSION['id_portfela'];
         $cenaPakietu = $_POST['cena_pakietu'];
-        $saldo = $_SESSION['saldo'];
         $noweSaldo = $saldo - $cenaPakietu;
 
+        echo 'Cena pakietu: ' . $cenaPakietu;
+        echo 'Nowe saldo: ' . $noweSaldo;
+
         $minusSaldo = ("UPDATE portfele SET saldo = ? WHERE id = ?");
-        $rez = $polaczenie->prepare($minusSaldo);
-        $rez->bind_param("di", $noweSaldo, $portfelId);
+        $rezultatNoweSaldo = $polaczenie->prepare($minusSaldo);
+        $rezultatNoweSaldo->bind_param("di", $noweSaldo, $portfelId);
 
-        if($rez->execute()) {
+        if($rezultatNoweSaldo->execute()) {
 
-            $rez->execute();
+            $rezultatNoweSaldo->execute();
 
             header('Location: pakiety_premium.php');
 
@@ -105,10 +118,10 @@ if (isset($_POST["execute"]) && (isset($_POST['cena_pakietu']))){
         $noweSaldo = $saldo - $cenaPakietu;
 
         $minusSaldo = ("UPDATE portfele SET saldo = ? WHERE id = ?");
-        $rez = $polaczenie->prepare($minusSaldo);
-        $rez->bind_param("di", $noweSaldo, $portfelId);
+        $rezultatNoweSaldo = $polaczenie->prepare($minusSaldo);
+        $rezultatNoweSaldo->bind_param("di", $noweSaldo, $portfelId);
 
-        if($rez->execute()) {
+        if($rezultatNoweSaldo->execute()) {
 
             header('Location: pakiety_premium.php');
 
@@ -122,15 +135,18 @@ if (isset($_POST["execute"]) && (isset($_POST['cena_pakietu']))){
 
     }
 
-    $updateRezultat->close();
-    $rez->close();
-    $rezultat->close();
+    $rezultatSaldo->close();
+    $rezultatNoweSaldo->close();
+    $rezultatPremium->close();
 
     }
 
     $polaczenie->close();
 
     unset($_POST["execute"]);
+} else {
+    echo 'Błąd podcas pobierania salda użytkownika.';
+}
 } else {
     header('Location: pakiety_premium.php');
 }

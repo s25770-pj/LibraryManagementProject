@@ -54,7 +54,7 @@ if($rez) {
     echo '</div>';
 
     } else {
-        header('Location: ../Ksiazki/index.php');
+        header('Location: ../Panel_Uzytkownika/doladuj_saldo.php');
     }
 
 } else {

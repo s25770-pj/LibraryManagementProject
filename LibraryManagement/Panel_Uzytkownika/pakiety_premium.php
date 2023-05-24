@@ -32,7 +32,7 @@ if (!isset($_SESSION['zalogowany']))
     echo '<input type="hidden" name="cena_pakietu" value="20">';
     echo '<input type="submit" name="execute" value="Kup pakiet">';
     echo '</form>';
-    echo '[ <a href="userpanel.php">Powrót</a> ]</p>';
+    echo '[ <a href="panel_uzytkownika.php">Powrót</a> ]</p>';
 
     $id = $_SESSION['id'];
 

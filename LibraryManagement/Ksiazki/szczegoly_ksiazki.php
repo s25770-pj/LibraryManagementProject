@@ -16,8 +16,8 @@ if(isset($_GET['id_ksiazki'])){
 
     $saldo = $_SESSION['saldo'];
     
-    echo '<p>[ <a href="../Panel_Uzytkownika/userpanel.php">Profil</a> ]</p>';
-    echo '<p>[ <a href="../Panel_Uzytkownika/userpanel.php">' . $saldo . 'zł</a> ]</p>';
+    echo '<p>[ <a href="../Panel_Uzytkownika/panel_uzytkownika.php">Profil</a> ]</p>';
+    echo '<p>[ <a href="../Panel_Uzytkownika/panel_uzytkownika.php">' . $saldo . 'zł</a> ]</p>';
 
     ?>
 
@@ -83,7 +83,7 @@ if ($polaczenie->connect_errno) {
             $querySelect->execute();
             $rez = $querySelect->get_result();
 
-            if(($_SESSION['saldo'] > $row['cena']) && ($rez->num_rows < 1 )){
+            if(($_SESSION['saldo'] >= $row['cena']) && ($rez->num_rows < 1 )){
 
             //Sprawdzenie czy uzytkownik ma wystarczające saldo
 
@@ -93,7 +93,7 @@ if ($polaczenie->connect_errno) {
             echo '<input type = "hidden" name = "cena_ksiazki" value ="' . $cena . '">';
             echo '<input type = "submit" name = "wypozycz" value = "Wypożycz" class = "przycisk">';
             echo '</form>';
-            } else if(($_SESSION['saldo'] > $row['cena']) && ($rez->num_rows > 0 )) {
+            } else if(($rez->num_rows > 0 )) {
 
                 //Sprawdzenie czy uzytkownik już wypożyczył tą książkę
 
@@ -112,7 +112,11 @@ if ($polaczenie->connect_errno) {
                 echo '<input type = "submit" name = "doladuj" value = "Doładuj saldo" class = "przycisk">';
                 echo '</form>';
             }
-            echo '<p>[ <a href = "index.php"> Powrót </a> ]</p>';
+
+            echo '<form action = "index.php">';
+            echo '<input type = "submit" name = "powrot" value = "Powrót" class = "przycisk">';
+            echo '</form>';
+
             echo '</div>'; //wypozycz
             echo '</div>'; //srodek
             echo '<div class = "prawa">';
