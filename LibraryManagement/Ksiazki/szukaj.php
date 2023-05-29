@@ -37,23 +37,19 @@ $rezultat = $polaczenie->query($query);
 if ($rezultat->num_rows > 0 || empty($fraza) || empty($gatunek)) {
     echo '<ul>';
     while ($row = $rezultat->fetch_assoc()) {
-        echo '<li>';
-        echo '<strong>Tytuł:</strong> ' . $row['tytul'] . '<br />';
-        echo '<strong>Autor:</strong> ' . $row['autor'] . '<br />';
-        echo '<strong>Gatunek:</strong> ' . $row['gatunek'] . '<br />';
-        echo '<strong>Rodzaj:</strong> ' . $row['rodzaj'] . '<br />';
-        echo '<strong>Cena:</strong> ' . $row['cena'] . '<br />';
-        echo '<form action="szczegoly_ksiazki.php" method="GET">';
-        echo '<input type="hidden" name="id_ksiazki" value="' . $row['id'] . '">';
-        echo '<input type="submit" name="szczegoly" value="Szczegóły" class="przycisk">';
-        echo '</form>';
-        echo '</li>';
-        echo '<br />';
+      echo '<li class="book-item">';
+      echo '<strong>Tytuł:</strong> ' . $row['tytul'] . '<br />';
+      echo '<strong>Autor:</strong> ' . $row['autor'] . '<br />';
+      echo '<form action="szczegoly_ksiazki.php" method="GET">';
+      echo '<input type="hidden" name="id_ksiazki" value="' . $row['id'] . '">';
+      echo '<input type="submit" name="szczegoly" value="Szczegóły" class="przycisk">';
+      echo '</form>';
+      echo '</li>';
     }
     echo '</ul>';
-} else {
+  } else {
     echo 'Brak książek pasujących do wyszukiwanej frazy.';
-}
+  }
 
 $polaczenie->close();
 

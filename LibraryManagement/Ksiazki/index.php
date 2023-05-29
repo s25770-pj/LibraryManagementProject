@@ -16,103 +16,116 @@
 </head>
 
 <body>
-<div class = 'body'>
+<div id = "duzy-banner">
 
-<div class = 'banner'>
+    <div class = 'banner'>
 
-<?php 
+        <?php 
 
-require_once "../Laczenie_Z_Baza/connect.php";
+        if ((!isset($_SESSION['zalogowany']))) {
 
-$polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
+            //przyciski logowania i rejestracji
+            echo '<div class = "logowanie">';
+                echo '<p>[ <a class = "p" href="../Logowanie_Rejestracja/panel_logowania.php">Logowanie</a> ]</p>';
+            echo '</div>'; 
+                
+            echo '<div class = "rejestracja">';
+                echo '<p>[ <a href="../Logowanie_Rejestracja/rejestracja.php">Rejestracja</a> ]</p>';
+            echo '</div>'; 
 
-if ($polaczenie->connect_errno) {
-    exit("Błąd połączenia z bazą danych: " . $polaczenie->connect_errno);
-}
+            } else {
 
-if ((!isset($_SESSION['zalogowany'])))
+                require_once '../Laczenie_Z_Baza/connect.php';
 
-	{
+                $polaczenie = new mysqli($host, $db_user, $db_password, $db_name);
 
-	echo '<div class = "logowanie">';
-	echo '<p>[ <a class = "p" href="../Logowanie_Rejestracja/panel_logowania.php">Logowanie</a> ]</p>';
-	echo '</div>'; //logowanie
-    
-	echo '<div class = "rejestracja">';
-	echo '<p>[ <a href="../Logowanie_Rejestracja/rejestracja.php">Rejestracja</a> ]</p>';
-	echo '</div>'; //rejestracja
+                if ($polaczenie->connect_errno) {
+                    exit("Błąd połączenia z bazą danych: " .$polaczenie->connect_errno);
+                }
 
-	}
+            $id = $_SESSION['id'];
+                $jakie_saldo = "SELECT saldo FROM portfele WHERE id_uzytkownika = '$id'";
+                $rezultat = $polaczenie->query($jakie_saldo);
 
-	if(isset($_SESSION['zalogowany']))
-	{
+                if($rezultat) {
 
-    $id = $_SESSION['id'];
-    $jakie_saldo = "SELECT saldo FROM portfele WHERE id_uzytkownika = '$id'";
-    $rezultat = $polaczenie->query($jakie_saldo);
+                    if($rezultat->num_rows > 0 ) {
+                    $row = $rezultat->fetch_assoc();                    $_SESSION['saldo'] = $row['saldo'];
 
-    if($rezultat) {
+                    }
+                }
 
-        if($rezultat->num_rows > 0 ) {
-        $row = $rezultat->fetch_assoc();
-        $_SESSION['saldo'] = $row['saldo'];
+                //Przejście do portfela
+                $saldo = $_SESSION['saldo'];
+                echo '<div class = "menu">';
 
-    }
-}
+                    echo '<form action = "../Panel_Uzytkownika/panel_uzytkownika.php">';
+                    echo '<input type = "submit" value = "Profil">';
+                    echo '</form>';
 
-        //Przejście do portfela
-        $saldo = $_SESSION['saldo'];
-		echo '<p>[ <a href="../Panel_Uzytkownika/panel_uzytkownika.php">Profil</a> ]</p>';
-        echo '<p>[ <a href="../Panel_Uzytkownika/doladuj_saldo.php">' . $saldo . 'zł</a> ]</p>';
+                echo '</div>';
 
-	}
+                $saldo = number_format($saldo, 2, ',', ' ') . " zł";
 
-?>
+                echo '<div class = "menu">';
 
-</div> <!-- banner -->
+                    echo '<form action = "../Panel_Uzytkownika/doladuj_saldo.php">';
+                    echo '<input type = "submit" value = "'. $saldo .'">';
+                    echo '</form>';
 
-<div class = 'pod_bannerem'>
+                echo '</div>';
 
-<div class = 'lewa'>
+            }
 
-</div> <!-- lewa -->
+            ?>
 
-<div class = 'srodek'>
+        </div> <!-- banner -->
+            <div id = "wyszukiwanie">
 
-<div class = 'wyszukiwanie'>
+                <label for="jakiGatunek"></label>
+                <select id="jakiGatunek" oninput="searchBooks()" class = "wyszukaj_gatunek">
+                    <option value="" selected>Wszystkie gatunki</option>
+                    <option value="Thriller">Thriller</option>
+                    <option value="Fantastyka">Fantastyka</option>
+                    <option value="Akcja">Akcja</option>
+                    <option value="Romans">Romans</option>
+                </select>
 
-<label for="jakiGatunek"></label>
-<select id="jakiGatunek" oninput="searchBooks()" class = "wyszukaj_gatunek">
-    <option value="" selected>Wszystkie gatunki</option>
-    <option value="Thriller">Thriller</option>
-    <option value="Fantastyka">Fantastyka</option>
-    <option value="Akcja">Akcja</option>
-    <option value="Romans">Romans</option>
-</select>
+                <input type="text" id="znajdzFraze" placeholder="Wyszukaj książkę lub autora" oninput="searchBooks()" class="wyszukaj_tekst">
 
-<input type="text" id="znajdzFraze" placeholder="Wyszukaj książkę lub autora" oninput="searchBooks()" class="wyszukaj_tekst">
+        </div>
+    </div> <!--duzy-banner -->
 
-</div>
+    <div class = 'pod_bannerem'>
 
-<div id='bookResults'></div>
+        <div class = 'lewa'>
 
-<?php
+        </div> <!-- lewa -->
 
-$polaczenie->close();
+        <div class = 'srodek'>
 
-?> 
-	
-	<br /><br />
-<?php
+            <div class = 'wyszukiwanie'>
 
+            </div>
 
-	if(isset($_SESSION['blad']))	echo $_SESSION['blad'];
-?>
-</div> <!--srodek-->
-             <div class = "prawa">
-             </div> <!--prawa-->  
+        <div id='bookResults'></div>
+
+        <?php
+
+        $polaczenie->close();
+
+        ?> 
+                
+            <br /><br />
+        <?php
+
+            if(isset($_SESSION['blad']))	echo $_SESSION['blad'];
+
+        ?>
+        </div> <!--srodek-->
+        <div class = "prawa">
+        </div> <!--prawa-->  
 </div> <!-- podbannerem-->
-</div> <!-- body -->
 
 </body>
 </html>

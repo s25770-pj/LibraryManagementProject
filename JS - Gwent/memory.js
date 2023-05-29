@@ -23,7 +23,6 @@ var pairsLeft = 6;
 function revealCard(nr) {
 
     var opacityValue = $('#c'+nr).css('opacity');
-    //alert(nr);
 
     if (opacityValue != 0 && lock == false) {
         lock = true;
@@ -34,20 +33,20 @@ function revealCard(nr) {
         $('#c' + nr).removeClass('card');
     
         if(oneVisible == false) {
-            //1st card
+            //first card
     
             oneVisible = true;
             visible_nr = nr;
             lock = false;
         } else {
-            //2nd card
+            //second card
     
             if(cards[visible_nr] == cards[nr]) {
-                //para
+                //pair
     
                 setTimeout(function() { hide2Cards(nr, visible_nr) }, 750);
             } else {
-                //nie para
+                //not a pair
                 
                 setTimeout(function() { restore2Cards(nr, visible_nr) }, 1000);
             }
