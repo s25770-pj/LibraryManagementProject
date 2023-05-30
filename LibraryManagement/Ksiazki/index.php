@@ -25,11 +25,12 @@
         if ((!isset($_SESSION['zalogowany']))) {
 
             //przyciski logowania i rejestracji
-            echo '<div class = "logowanie">';
+            
+            echo '<div id = "logowanie">';
                 echo '<p>[ <a class = "p" href="../Logowanie_Rejestracja/panel_logowania.php">Logowanie</a> ]</p>';
             echo '</div>'; 
                 
-            echo '<div class = "rejestracja">';
+            echo '<div id = "rejestracja">';
                 echo '<p>[ <a href="../Logowanie_Rejestracja/rejestracja.php">Rejestracja</a> ]</p>';
             echo '</div>'; 
 
@@ -57,6 +58,15 @@
 
                 //Przejście do portfela
                 $saldo = $_SESSION['saldo'];
+                echo '<div id = "koszykArr">';
+
+                    echo '<div id = "koszyk">';
+                    echo '<img src="cart.png">';
+                    echo 'Koszyk';
+                    echo '</div>'; 
+
+                echo '</div>'; 
+
                 echo '<div class = "menu">';
 
                     echo '<form action = "../Panel_Uzytkownika/panel_uzytkownika.php">';

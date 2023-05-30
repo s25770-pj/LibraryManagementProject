@@ -202,7 +202,7 @@ li {
     height: 100%;
     width: 100%;
     cursor: pointer;
-    font-weight: bold;
+    font-family: Montserrat,sans-serif;
 }
 
 .menu input:hover {
@@ -213,5 +213,27 @@ li {
     cursor: pointer;
 }
 
+#koszykArr {
+    display: flex;
+    width: 6%;
+    justify-content: center;
+    font-size: small;
+}
+
+#koszykArr:hover {
+    background-color: rgb(206, 206, 255);
+}
+
+#koszyk {
+    display: flex;
+    text-align: center;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+img {
+    cursor: pointer;
+    margin-right: 5px;
+}
 
 
