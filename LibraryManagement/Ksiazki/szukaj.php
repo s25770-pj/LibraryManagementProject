@@ -38,6 +38,11 @@ if ($rezultat->num_rows > 0 || empty($fraza) || empty($gatunek)) {
     echo '<ul>';
     while ($row = $rezultat->fetch_assoc()) {
       echo '<li class="book-item">';
+      $id = $row['id'];
+      echo '<a href = "./szczegoly_ksiazki.php?id=' . $id . '">';
+      $okladka = $row ['okladka'] . '.jpg';
+      echo '<img src="../Okladki/' . $okladka . '" alt="Okładka książki"> <br />';
+      echo '</a>';
       echo $row['tytul'] . '<br />';
       echo $row['autor'] . '<br />';
 

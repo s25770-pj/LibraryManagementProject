@@ -1,13 +1,13 @@
 <?php
 // Ścieżka do oryginalnego pliku PNG
-$originalImagePath = 'D:\XAMPP\htdocs\Projects\LibraryManagement\Ksiazki\cartResize.png';
+$originalImagePath = 'D:\XAMPP\htdocs\Projects\LibraryManagement\Okladki\W pustyni i w puszczyr.jpg';
 
 // Wczytaj oryginalny obraz PNG
 $originalImage = imagecreatefrompng($originalImagePath);
 
 // Nowe wymiary obrazu
-$newWidth = 30;
-$newHeight = 30;
+$newWidth = 50;
+$newHeight = 100;
 
 // Utwórz nowy obraz o zmniejszonym rozmiarze
 $resizedImage = imagescale($originalImage, $newWidth, $newHeight);
@@ -16,7 +16,7 @@ $resizedImage = imagescale($originalImage, $newWidth, $newHeight);
 imagecolortransparent($resizedImage, imagecolorallocatealpha($resizedImage, 0, 0, 0, 127));
 
 // Ścieżka do zapisanego zmniejszonego obrazu PNG
-$resizedImagePath = 'D:\XAMPP\htdocs\Projects\LibraryManagement\Ksiazki\cart.png';
+$resizedImagePath = 'D:\XAMPP\htdocs\Projects\LibraryManagement\Okladki\W pustyni i w puszczy.jpg';
 
 // Zapisz zmniejszony obraz w formacie PNG
 imagepng($resizedImage, $resizedImagePath);

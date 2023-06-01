@@ -1,11 +1,82 @@
-.srodek {
-padding: 5%;
-justify-content: space-around;
+* {
+    box-sizing: border-box;
+}
+
+body,html {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#tlo {
+    background-image: url(../Panel_Uzytkownika/books.jpg);
+    -webkit-background-size: cover;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    height: 100%;
+}
+
+#pakiety {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 5;
+    width: 45%;
+    padding: 40px 0;
+    text-align: center;
+    border-top-left-radius: 70px;
+    border-bottom-right-radius: 70px;
+    background-color: rgba(0,0,0,0.3);
+    color: #fff;
+    font-weight: bold;
+    border: 10px inset #fff;
 }
 
 .przycisk {
-    background-color: lightblue;
+    display: inline-block;
+    padding: 10px 50px;
+    border: 2px solid #fff;
+    font-size: 18px;
+    text-decoration: none;
+    color: #fff;
+    margin-top: 15px;
     cursor: pointer;
-    padding: 10px 20px;
-    border: none;
+    background-color: transparent;
+}
+
+.przycisk_kwota {
+    display: inline-block;
+    padding: 10px 50px;
+    max-width: 12.5%;
+    border: 2px solid #fff;
+    font-size: 18px;
+    text-decoration: none;
+    color: #fff;
+    margin-top: 15px;
+    cursor: pointer;
+    background-color: transparent;
+}
+
+.przycisk:hover {
+    background-color: rgb(206, 206, 255);
+}
+
+.przycisk_kwota:hover {
+    background-color: rgb(206, 206, 255);
+}
+
+.podswietlony {
+    background-color: rgb(206, 206, 255);
+}
+
+.dodaj_ksiazke {
+    background-color: transparent;
+    color: #fff;
+}
+
+option {
+    color: black;
 }

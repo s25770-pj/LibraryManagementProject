@@ -9,7 +9,7 @@ body {
     justify-content: center;
 }
 
-#duzy-banner {
+.duzy-banner {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -19,12 +19,9 @@ body {
     font-family: Montserrat,sans-serif;
 }
 
-.banner, .pod_bannerem {
+.banner {
     display: flex;
     box-sizing: border-box;
-}
-
-.banner {
     justify-content: flex-end;
     align-items: center;
     background-color: rgb(233, 232, 232);
@@ -36,7 +33,9 @@ body {
 }
 
 .pod_bannerem {
-    height:70%;
+    display: flex;
+    box-sizing: border-box;
+    height:80%;
     width: 100%;
     justify-content: center;
 }
@@ -55,6 +54,7 @@ body {
     display: inline-block;
     flex-wrap: wrap;
     width: 60%;
+    height: 100%;
     background-color: white;
     align-content: flex-start;
     justify-content: center;
@@ -86,38 +86,42 @@ body {
 }
 
 .zdjecie, .info{
-    min-width: 50%;
-    min-height: 50vh;
     box-sizing: border-box;
     display: flex;
-    align-items: center;
 }
 
 .zdjecie {
     justify-content: flex-end;
     align-items: top;
-    padding: 5%;
-    border: solid green 5px;
+    height: 70%;
+    width: 40%;
+    float: left;
+    padding-top: 5%;
+    padding-right: 5%;
 }
 
 .info {
-    border: solid aquamarine 5px;
+    width: 60%;
+    height: 30%;
+    float: left;
+    margin-top: 7%;
 }
 
 .info table {
+    left: 0;
     border-collapse: collapse;
     margin: 0 auto;
   }
 
-.opis {
+#opis {
     justify-content: flex-end;
-    border: solid yellow 5px;
-    padding: 2%;
     align-items: center;
-    width: 100%;
+    width: 60%;
+    height: 40%;
+    float: left;
 }
 
-.opis table {
+#opis table {
     margin-left: 0;
     margin-right: auto;
 }
@@ -128,22 +132,11 @@ body {
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
+    height: 20%;
     width: 100%;
-    border: solid yellowgreen 5px;
     flex-direction: column;
+    float: none;
 }
-
-.wypozycz form {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-}
-
-.wypozycz p {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-  }
 
 td {
     padding: 6px;
@@ -153,35 +146,38 @@ li {
     margin-top: 10%;
   }
 
+ul {
+    display: inline-block;
+    width: 100%;
+}
+
+tr {
+    border-bottom: 1px solid lightgray;
+}
+
   .book-item {
     display: inline-block;
-    width: 25%;
     margin: 10px;
+    width: 17%;
     font-size: 15px;
+    justify-content: center;
+    text-align: center;
   }
 
-.przycisk {
-    margin-top: 15px;
-    font-weight: medium;
-    font-size: medium;
-    font-family: Arial, Helvetica, sans-serif;
+  .przycisk {
+    display: inline-block;
+    padding: 10px 50px;
+    border: 2px solid lightgray;
+    font-size: 18px;
+    text-decoration: none;
     color: black;
-    background-color: rgb(144, 209, 46);
+    margin-top: 15px;
     cursor: pointer;
-    padding: 10px 20px;
-    border: 3px solid #220022;
+    background-color: transparent;
 }
 
 .przycisk:hover {
-    margin-top: 15px;
-    font-weight: medium;
-    font-size: medium;
-    font-family: Arial, Helvetica, sans-serif;
-    color: black;
-    background-color: greenyellow;
-    cursor: pointer;
-    padding: 10px 20px;
-    border: 3px solid #220022;
+    background-color: rgb(206, 206, 255);
 }
 
 .menu {
