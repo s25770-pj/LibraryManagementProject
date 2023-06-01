@@ -31,7 +31,6 @@ if (isset($_GET['fraza']) && !empty($_GET['fraza']) && empty($_GET['gatunek'])) 
     $gatunek = '';
     $query = "SELECT * FROM inwentarz";
 }
-
 $rezultat = $polaczenie->query($query);
 
 if ($rezultat->num_rows > 0 || empty($fraza) || empty($gatunek)) {

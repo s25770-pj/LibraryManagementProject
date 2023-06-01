@@ -10,7 +10,7 @@
 		$nick = $_POST['nick'];
 		
 		//Sprawdzenie długości nicka
-		if ((strlen($nick)<3) || (strlen($nick)>20))
+		/*if ((strlen($nick)<3) || (strlen($nick)>20))
 		{
 			$wszystko_OK=false;
 			$_SESSION['e_nick']="Nick musi posiadać od 3 do 20 znaków!";
@@ -20,7 +20,7 @@
 		{
 			$wszystko_OK=false;
 			$_SESSION['e_nick']="Nick może składać się tylko z liter i cyfr (bez polskich znaków)";
-		}
+		}*/
 		
 		// Sprawdź poprawność adresu email
 		$email = $_POST['email'];

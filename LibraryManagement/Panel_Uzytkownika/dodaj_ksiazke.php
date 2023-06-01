@@ -14,8 +14,6 @@ if (!isset($_SESSION['zalogowany']))
 <html lang="pl">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel Administratora</title>
 
     <link rel="stylesheet" href="../Style/doladuj_saldo.css">
@@ -25,29 +23,29 @@ if (!isset($_SESSION['zalogowany']))
 
 <div id = "tlo"></div>
 
-<div id = "pakiety">
+    <div id = "pakiety">
+
+    <p><strong>Dodaj książkę do oferty księgarni: </strong></p>
+
+    <form method = "POST">
+
+        Tytuł: <input type = "text" name = "tytul" class = "dodaj_ksiazke"> <br /><br />
+        Autor: <input type = "text" name = "autor" class = "dodaj_ksiazke"> <br /><br />
+        Gatunek: <input type = "text" name = "gatunek" class = "dodaj_ksiazke"> <br /><br />
+        Rodzaj: <select name = "rodzaj" class = "dodaj_ksiazke">';
+        <option value = "Książka"> Książka </option>';
+        <option value = "Audio Book"> Audio Book </option>';
+        </select><br /><br />';
+        Cena: <input type = "number" id = "no-spinners" name = "cena" class = "dodaj_ksiazke"> <br /><br />
+        Opis: <br /> <textarea name="opis" cols="35" rows="5" class = "dodaj_ksiazke">Tu wpisz tekst który pojawi się domyślnie</textarea> <br />
+        <input type = "submit" value = "Dodaj ksiazke" class = "przycisk"> <br /><br />
+        </form>';
+        <form action = "../Panel_Uzytkownika/panel_uzytkownika.php">
+        <input type = "submit" name = "powrot" value = "Powrót" class = "przycisk">
+        
+    </form>
 
     <?php
-
-    echo '<p><strong>Dodaj książkę do oferty księgarni: </strong></p>';
-
-    echo '<form method = "POST">';
-
-    echo 'Tytuł: <input type = "text" name = "tytul" class = "dodaj_ksiazke"> <br /><br />';
-    echo 'Autor: <input type = "text" name = "autor" class = "dodaj_ksiazke"> <br /><br />';
-    echo 'Gatunek: <input type = "text" name = "gatunek" class = "dodaj_ksiazke"> <br /><br />';
-    echo 'Rodzaj: <select name = "rodzaj" class = "dodaj_ksiazke">';
-    echo '<option value = "Książka"> Książka </option>';
-    echo '<option value = "Audio Book"> Audio Book </option>';
-    echo '</select><br /><br />';
-    echo 'Cena: <input type = "number" id = "no-spinners" name = "cena" class = "dodaj_ksiazke"> <br /><br />';
-    echo 'Opis: <br /> <textarea name="opis" cols="35" rows="5" class = "dodaj_ksiazke">Tu wpisz tekst który pojawi się domyślnie</textarea> <br />';
-    echo '<input type = "submit" value = "Dodaj ksiazke" class = "przycisk"> <br /><br />';
-    echo '</form>';
-    echo '<form action = "../Panel_Uzytkownika/panel_uzytkownika.php">';
-    echo '<input type = "submit" name = "powrot" value = "Powrót" class = "przycisk">';
-    echo '</form>';
-
     if(isset($_POST['rodzaj'])){
 
     $buttonOut  = $_POST['rodzaj'];
