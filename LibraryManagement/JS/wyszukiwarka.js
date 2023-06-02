@@ -4,8 +4,8 @@ window.addEventListener('DOMContentLoaded', function() {
   
 function searchBooks() {
 
-    var fraza = document.getElementById("znajdzFraze").value;
-    var gatunek = document.getElementById("jakiGatunek").value;
+    var phrase = document.getElementById("find_phrase").value;
+    var category = document.getElementById("what_category").value;
 
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
@@ -13,6 +13,6 @@ function searchBooks() {
             document.getElementById("bookResults").innerHTML = this.responseText;
         }
     };
-    xhttp.open("GET", "szukaj.php?fraza=" + fraza + "&gatunek=" + gatunek, true);
+    xhttp.open("GET", "search.php?phrase=" + phrase + "&category=" + category, true);
     xhttp.send();
 }

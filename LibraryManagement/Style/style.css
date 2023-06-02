@@ -9,7 +9,7 @@ body {
     justify-content: center;
 }
 
-.duzy-banner {
+.big_banner {
     display: flex;
     flex-wrap: wrap;
     width: 100%;
@@ -60,14 +60,14 @@ body {
     justify-content: center;
 }
 
-#wyszukiwanie {
+#searching {
     display: flex;
     width: 100%;
     height: 15%;
     justify-content: center;
 }
 
-#wyszukiwanie input, #wyszukiwanie select {
+#searching input, #searching select {
     border-top: none;
     border-left: none;
     border-right: none;
@@ -113,7 +113,7 @@ body {
     margin: 0 auto;
   }
 
-#opis {
+#description {
     justify-content: flex-end;
     align-items: center;
     width: 60%;
@@ -121,13 +121,13 @@ body {
     float: left;
 }
 
-#opis table {
+#description table {
     margin-left: 0;
     margin-right: auto;
 }
 
-.wypozycz {
-    position: relative;
+.rent {
+    position: reyearsive;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -164,7 +164,7 @@ tr {
     text-align: center;
   }
 
-  .przycisk {
+  .button {
     display: inline-block;
     padding: 10px 50px;
     border: 2px solid lightgray;
@@ -176,7 +176,7 @@ tr {
     background-color: transparent;
 }
 
-.przycisk:hover {
+.button:hover {
     background-color: rgb(206, 206, 255);
 }
 
