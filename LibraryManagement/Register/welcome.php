@@ -1,12 +1,12 @@
 <?php
 
-require_once '../path.php';
+require_once '../Includes/path.php';
 
 	session_start();
 	
 	if (!isset($_SESSION['successfull_registration']))
 	{
-		header('Location: '.$local);
+		header('Location: '.$index);
 		exit();
 	}
 	else
@@ -42,7 +42,7 @@ require_once '../path.php';
 	Dziękujemy za rejestrację w serwisie! Możesz już zalogować się na swoje konto!<br /><br />
 	<?php
 
-	echo' <a href='. $local .'>Zaloguj się na swoje konto!</a>';
+	echo' <a href='. $index .'>Zaloguj się na swoje konto!</a>';
 	?>
 	<br /><br />
 

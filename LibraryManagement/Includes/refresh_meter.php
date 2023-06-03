@@ -4,11 +4,11 @@ session_start();
 
 if (!isset($_SESSION['login']))
 {
-	header('Location: ' . $local);
+	header('Location: ' . $index);
 	exit();
 }
 
-require_once '../Laczenie_Z_Baza/connect.php';
+require_once '../Includes/path.php';
 
 $connection = new mysqli($host, $db_user, $db_password, $db_name);
 

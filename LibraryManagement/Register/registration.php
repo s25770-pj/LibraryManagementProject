@@ -1,6 +1,6 @@
 <?php
 
-require_once '../path.php';
+require_once '../Includes/path.php';
 
 	session_start();
 	

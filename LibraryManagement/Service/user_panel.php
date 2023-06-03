@@ -2,12 +2,12 @@
 
 	session_start();
 
-	require_once "../path.php";
+	require_once "../Includes/path.php";
 	
 	if (!isset($_SESSION['login']))
 	{
 
-		header('Location: $local');
+		header('Location: $index');
 		exit();
 
 	}
@@ -44,12 +44,12 @@ if($date_time<$end) {
 
 	if($_SESSION['access'] == "admin"){
 
-	echo '<p>[ <a href='. $abook .'>Dodaj książkę</a> ]</p>';
+	echo '<p>[ <a href='. $add_book .'>Dodaj książkę</a> ]</p>';
 
 	}
 	echo '<p>[ <a href='. $rentals .'>Historia renten!</a> ]</p>';
-	echo '<p>[ <a href='. $ppremium .'>Kup karnet premium</a> ]</p>';
-	echo '<p>[ <a href='. $local .'>Powrót</a> ]</p>';
+	echo '<p>[ <a href='. $package_premium .'>Kup karnet premium</a> ]</p>';
+	echo '<p>[ <a href='. $index .'>Powrót</a> ]</p>';
 	
 ?>
 

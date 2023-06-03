@@ -1,3 +1,8 @@
+:root
+{
+    --book-image: url(../Images/Books.jpg);
+}
+
 * {
     box-sizing: border-box;
 }
@@ -9,74 +14,74 @@ body,html {
     font-family: Arial, Helvetica, sans-serif;
 }
 
-#body {
-    background-image: url(../Panel_Uzytkownika/books.jpg);
+#background {
+    background-image: var(--book-image);
     -webkit-background-size: cover;
     background-size: cover;
     background-repeat: no-repeat;
     background-position: center center;
     height: 100%;
 }
-
-#pakiety {
+#packages {
     position: absolute;
     top: 50%;
     left: 50%;
-    transform: transyearse(-50%, -50%);
+    transform: translate(-50%, -50%);
     z-index: 5;
     width: 45%;
     padding: 40px 0;
     text-align: center;
     border-top-left-radius: 70px;
     border-bottom-right-radius: 70px;
-    background-color: rgba(0,0,0,0.3);
-    color: #fff;
+    background-color: rgb(233 232 232 / 71%);
+    color: black;
     font-weight: bold;
-    border: 10px inset #fff;
+    border: 10px inset #d4d2d2;
+    backdrop-filter: blur(2px); 
 }
 
-.button {
+.button{
     display: inline-block;
     padding: 10px 50px;
     border: 2px solid #fff;
     font-size: 18px;
     text-decoration: none;
     color: #fff;
-    margin-top: 15px;
+    margin-top: 10px;
     cursor: pointer;
-    background-color: transparent;
+    background-color: #a39494;
 }
 
 .button_sum {
-    display: inline-block;
     padding: 10px 50px;
-    max-width: 12.5%;
+    width: 50%;
     border: 2px solid #fff;
     font-size: 18px;
     text-decoration: none;
     color: #fff;
-    margin-top: 15px;
+    margin-top: 10px;
     cursor: pointer;
-    background-color: transparent;
+    background-color: #7f7070;
 }
 
-.button:hover {
-    background-color: rgb(206, 206, 255);
+button:hover, .button_sum:hover {
+    background-color: rgb(141 141 141);
 }
 
-.button_sum:hover {
-    background-color: rgb(206, 206, 255);
-}
-
-.podswietlony {
-    background-color: rgb(206, 206, 255);
+.active {
+    background-color: rgb(94 82 82);
 }
 
 .add_book {
     background-color: transparent;
     color: #fff;
+    background-color: #7f7070;
 }
 
 option {
-    color: black;
+    color: #fff;
+}
+
+table {
+    margin-left: 25%;
 }

@@ -1,12 +1,12 @@
 <?php 
 
-require_once '../path.php';
+require_once '../Includes/path.php';
 
 session_start();
 
 if (isset($_SESSION['login']))
 	{
-		header('Location: '.$local);
+		header('Location: '.$index);
 		exit();
 	}
 
@@ -20,7 +20,7 @@ if (isset($_SESSION['login']))
 </head>
 <body>
 
-    <form action= "../Login_Register/login.php" method="POST">
+    <form action= "<?php echo $login ?>" method="POST">
 	
     Login: <br /> <input type="text" name="login" /> <br />
     Hasło: <br /> <input type="password" name="password" /> <br /><br />
@@ -29,7 +29,7 @@ if (isset($_SESSION['login']))
 
     <?php
 
-    echo '<p>[ <a href='. $local .'>Powrót</a> ]</p>';
+    echo '<p>[ <a href='. $index .'>Powrót</a> ]</p>';
 
     ?>
 

@@ -2,7 +2,7 @@
 
 session_start();
 
-require_once "../path.php";
+require_once "../Includes/path.php";
 
 if (!isset($_SESSION['login']))
 	{
@@ -32,7 +32,7 @@ if (!isset($_SESSION['login']))
     echo '<input type="hidden" name="packet_price" value="20">';
     echo '<input type="submit" name="execute" value="Kup pakiet">';
     echo '</form>';
-    echo '[ <a href= '. $upanel .'>Powrót</a> ]</p>';
+    echo '[ <a href= '. $user_panel .'>Powrót</a> ]</p>';
 
     $id = $_SESSION['id'];
 

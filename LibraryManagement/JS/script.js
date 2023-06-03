@@ -2,7 +2,7 @@
 $(document).ready(function() {
     function updateCounter() {
       $.ajax({
-        url: 'odswiez_licznik.php',
+        url: '../Includes/refresh_meter.php',
         type: 'GET',
         success: function(response) {
           $('#counter').html(response); // Aktualizuj wartość licznika na stronie

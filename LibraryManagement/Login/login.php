@@ -1,13 +1,13 @@
 <?php
 
-	require_once '../path.php';
+	require_once '../Includes/path.php';
 
 	session_start();
 	
 	if ((!isset($_POST['login'])) || (!isset($_POST['password'])))
 	{
 
-		header('Location: '.$local);
+		header('Location: '.$index);
 		exit();
 	}
 
@@ -49,18 +49,18 @@
 
 					$result->free_result();
 
-					header('Location: '. $local);
+					header('Location: '. $index);
 				} else {
 
 					$_SESSION['error'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
-					header('Location:' . $panel);
+					header('Location:' . $login_panel);
 					
 				}
 				
 			} else {
 				
 				$_SESSION['error'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
-				header('Location:' . $panel);
+				header('Location:' . $login_panel);
 				
 			}
 			

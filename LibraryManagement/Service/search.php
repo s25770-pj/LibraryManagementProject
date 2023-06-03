@@ -1,6 +1,6 @@
 <?php
 
-require_once "../path.php";
+require_once "../Includes/path.php";
 
 $connection = new mysqli($host, $db_user, $db_password, $db_name);
 
@@ -48,11 +48,11 @@ if ($result->num_rows > 0 || empty($phrase) || empty($category)) {
 
       echo '<li class="book-item">';
 
-      $id = $row['id'];
+      $book_id = $row['id'];
 
-      echo '<a href = '. $details .'?id=' . $id . '">';
+      echo "<a href = '$book_details?book_id=$book_id'>";
 
-      $cover = $row ['cover'] . '.jpg';
+      $cover = $images."/".$row ['cover'] . '.jpg';
 
       echo '<img src="' . $cover . '" alt="Book cover"> <br />';
       echo '</a>';

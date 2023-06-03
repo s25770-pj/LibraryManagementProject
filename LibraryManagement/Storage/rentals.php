@@ -1,12 +1,12 @@
 <?php
 
-require_once '../path.php';
+require_once '../Includes/path.php';
 
 session_start();
 
 if (!isset($_SESSION['login']))
 	{
-		header('Location:'. $local);
+		header('Location:'. $index);
 		exit();
 	}
 
@@ -20,7 +20,7 @@ if (!isset($_SESSION['login']))
 
     $userID = $_SESSION['id'];
 
-    $query = "SELECT stock.title, stock.author, stock.category, rentals.rent_date, rentals.return_date
+    $query = "SELECT stock.id, stock.title, stock.author, stock.category, rentals.rent_date, rentals.return_date
     FROM rentals INNER JOIN stock ON rentals.book_id = stock.id WHERE rentals.user_id = $userID";
 
     $result = $connection->query($query);
@@ -30,34 +30,33 @@ if (!isset($_SESSION['login']))
         echo "<ul>";
 
         while ($row = $result->fetch_assoc()) {
+            $category = $row['category'];
+
+            $query_category = "SELECT name FROM category WHERE id = $category";
+
+            $category_result = $connection->query($query_category);
+
+            if ($result->num_rows > 0) {
+
+                while ($row_cat = $category_result->fetch_assoc()) {
+            $id = $row['id'];
             echo "<li><strong>title:</strong> ". $row['title'] . "</li>";
             echo "<li><strong>author:</strong> " . $row['author'] . "</li>";
-            echo "<li><strong>category:</strong> " . $row['category'] . "</li>";
+            echo "<li><strong>category:</strong> " . $row_cat['name'] . "</li>";
             echo "<li><strong>Data rentenia:</strong> " . $row['rent_date'] . "</li>";
             echo "<li><strong>Data zwrotu:</strong> " . $row['return_date'] . "</li>";
+            echo "<a href = '$book_details?book_id=$id'>łot</a>";
             echo "<br>";
+                }
+            }
         }
 
         echo "</ul>";
     } else {
-        echo "Brak rentonych ksiazek dla tego uzytkownika.";
+        echo "Brak wypożyczonych ksiazek.";
     }
-    echo '[ <a href='. $panel .'>Powrót</a> ]</p>';
+    echo '[ <a href='. $login_panel .'>Powrót</a> ]</p>';
 
     $connection->close();
 
 ?>
-
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Panel użytkownika</title>
-</head>
-<body>
-    
-</body>
-</html>

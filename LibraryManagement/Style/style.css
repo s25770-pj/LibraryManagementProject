@@ -19,6 +19,16 @@ body {
     font-family: Montserrat,sans-serif;
 }
 
+#go_back, #logout {
+    display: flex;
+    width: 15%;
+    align-items: top;
+    height: 30%;
+    justify-content: center;
+}
+
+
+
 .banner {
     display: flex;
     box-sizing: border-box;
@@ -117,7 +127,7 @@ body {
     justify-content: flex-end;
     align-items: center;
     width: 60%;
-    height: 40%;
+    height: 30%;
     float: left;
 }
 
@@ -127,13 +137,13 @@ body {
 }
 
 .rent {
-    position: reyearsive;
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    justify-content: center;
+    justify-content: top;
     height: 20%;
-    width: 100%;
+    width: 40%;
     flex-direction: column;
     float: none;
 }
@@ -155,16 +165,16 @@ tr {
     border-bottom: 1px solid lightgray;
 }
 
-  .book-item {
+.book-item {
     display: inline-block;
     margin: 10px;
     width: 17%;
     font-size: 15px;
     justify-content: center;
     text-align: center;
-  }
+}
 
-  .button {
+.button, .button_back  {
     display: inline-block;
     padding: 10px 50px;
     border: 2px solid lightgray;
@@ -176,13 +186,18 @@ tr {
     background-color: transparent;
 }
 
-.button:hover {
+.button_back {
+    padding: 5px 25px;
+}
+
+.button:hover, .button_back:hover {
     background-color: rgb(206, 206, 255);
 }
 
 .menu {
     height: 80%;
-    width: 7%;
+    min-width: 7%;
+    margin-left: 1%;
 }
 
 .menu form {
@@ -210,19 +225,21 @@ tr {
     cursor: pointer;
 }
 
-#koszykArr {
+#cart_array {
     display: flex;
     width: 8%;
     justify-content: center;
     font-size: small;
+    margin-left: 1%;
 }
 
-#koszykArr:hover {
+#cart_array:hover {
     background-color: rgb(206, 206, 255);
 }
 
-#koszyk {
+#cart {
     display: flex;
+    margin-top: 5%;
     text-align: center;
     background-color: transparent;
     cursor: pointer;
