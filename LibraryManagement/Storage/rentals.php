@@ -40,10 +40,10 @@ if (!isset($_SESSION['login']))
 
                 while ($row_cat = $category_result->fetch_assoc()) {
             $id = $row['id'];
-            echo "<li><strong>title:</strong> ". $row['title'] . "</li>";
-            echo "<li><strong>author:</strong> " . $row['author'] . "</li>";
-            echo "<li><strong>category:</strong> " . $row_cat['name'] . "</li>";
-            echo "<li><strong>Data rentenia:</strong> " . $row['rent_date'] . "</li>";
+            echo "<li><strong>Tytuł:</strong> ". $row['title'] . "</li>";
+            echo "<li><strong>Autor:</strong> " . $row['author'] . "</li>";
+            echo "<li><strong>Kategoria:</strong> " . $row_cat['name'] . "</li>";
+            echo "<li><strong>Data wypożyczenia:</strong> " . $row['rent_date'] . "</li>";
             echo "<li><strong>Data zwrotu:</strong> " . $row['return_date'] . "</li>";
             echo "<a href = '$book_details?book_id=$id'>łot</a>";
             echo "<br>";
