@@ -1,5 +1,10 @@
 <?php
-class registerRepository {
+if (isset($_SESSION['logged'])){
+    header("Location: ../index.php");
+    die;
+}
+
+class RegisterRepository {
     private $db;
 
     public function __construct(Database $db) {
@@ -13,8 +18,8 @@ class registerRepository {
         $statement->bindParam(':username', $username);
         $statement->bindParam(':hash_password', $hash_password);
         $statement->bindParam(':email', $email);
-        $result = $statement->execute();
-
-        return $result;
+        $statement->execute();
+        
+        return true;
     }
 }

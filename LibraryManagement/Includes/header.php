@@ -4,8 +4,7 @@
 
     $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
     $filename = basename($parsedUrl['path']);
-
-    if($filename != 'index.php')
+    if($filename != 'index.php' && $filename != 'Service')
     {
 
         ?>
@@ -71,7 +70,6 @@
 
             //Przejście do portfela
             $add_balance = $_SESSION['balance'];
-
             if($_SESSION['access'] === 'admin') {
             echo '<div class = "menu" >';
 
@@ -131,8 +129,6 @@
 
     echo "</div>";
 
-    $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
-    $filename = basename($parsedUrl['path']);
 
     if(!empty($filename)) {
 
@@ -140,11 +136,18 @@
         ?>
         
         <div id = "logout">
-
+            <?php
+            if(isset($_SESSION['login'])){
+            ?>
             <button class = "button_back" onclick="window.location.href = '<?php echo $logout; ?>'">Wyloguj się</button>
+            <?php
+            }
+            ?>
 
         </div>
-    
+        <?php
+        if($filename == 'index.php' || $filename == 'Service') {
+        ?>
 
         <div id = "searching">
 
@@ -165,7 +168,7 @@
         </div>
 
     <?php
-
+        }
     }
 
     ?>

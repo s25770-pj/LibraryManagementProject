@@ -1,19 +1,24 @@
 <?php
 session_start();
 
+if (isset($_SESSION['logged'])){
+    header("Location: ../index.php");
+    die;
+}
+
 require_once '../Config/config.php';
-require_once '../Repository/loginRepo.php';
+require_once '../Repository/login_repo.php';
 
     $db = new Database('localhost', 'root', '', 'blog');
-    $loginRepository = new loginRepository($db);
+    $LoginRepository = new LoginRepository($db);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    if ($loginRepository->login($username, $password)) {
-        header("Location: $index");
-        exit();
+    if ($LoginRepository->login($username, $password)) {
+        header("Location:". $index);
+        die();
     } else {
         $error = "Nieprawidłowy login lub hasło";
     }

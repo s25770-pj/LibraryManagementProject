@@ -90,19 +90,21 @@ require_once "$header";
             $price = $row['price'];
             $book_id = $row['id'];
             $end_date = date('Y-m-d H:i:s');
+            if (isset($_SESSION['login'])) {
             $user_id = $_SESSION['id'];
+            }
 
             $is_rent = "SELECT * FROM rentals WHERE user_id = ? AND book_id = ? AND return_date > ?";
             $querySelect = $connection->prepare($is_rent);
             $querySelect->bind_param("iis", $user_id, $book_id, $end_date);
             $querySelect->execute();
             $rez = $querySelect->get_result();
-
-            if(($_SESSION['balance'] >= $row['price']) && ($rez->num_rows < 1 )){
+            
+            echo '<div class = "rent">';
+            if((isset($_SESSION['balance']) && $_SESSION['balance'] >= $row['price']) && ($rez->num_rows < 1 )){
 
             //Sprawdzenie czy uzytkownik ma wystarczające balance
 
-            echo '<div class = "rent">';
             echo "<form action = '$rent_book?book_id=".$book_id."' method = 'POST'>";
             echo '<input type = "hidden" name = "book_price" value ="' . $price . '">';
             echo '<input type = "submit" name = "rent" value = "Wypożycz" class = "button">';
@@ -111,12 +113,8 @@ require_once "$header";
 
                 //Sprawdzenie czy uzytkownik już wypożyczył tą książkę
 
-                echo '<div class = "rent">';
                 echo '<button class = "button" title="masz tą książke">book została już przez Ciebie wypożyczona </button>';
-
-            } else if(($_SESSION['balance'] < $row['price']) && ($rez->num_rows < 1)){
-
-                echo '<div class = "rent">';
+            } else if((isset($_SESSION['balance']) && $_SESSION['balance'] < $row['price']) && ($rez->num_rows < 1)){
                     echo "<form action = '$rebalance' method = 'POST'>";
                     echo '<input type = "hidden" name = "book_id" value ="' . $book_id . '">';
                     echo '<input type = "hidden" name = "book_price" value ="' . $price . '">';
@@ -124,14 +122,11 @@ require_once "$header";
                     echo '<input type = "submit" name = "recharge" value = "Doładuj saldo" class = "button">';
                     echo '</form>';
                 }
-
                 echo '</div>'; //rent 
 
             echo '</div>'; //srodek
 
-        echo '<div class = "prawa">';
-
-        echo '</div>'; //prawa 
+        echo '<div class = "prawa"></div>'; //prawa 
 
     echo '</div>'; //podbannerem
 

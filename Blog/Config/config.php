@@ -1,3 +1,4 @@
 <?php
-require_once '../Config/database.php';
-require_once '../Config/path.php';
+require_once 'database.php';
+require_once 'path.php';
+$style ='<link rel="stylesheet" type="text/css" href="../CSS/style.css">';

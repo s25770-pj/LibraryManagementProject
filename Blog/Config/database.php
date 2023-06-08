@@ -12,3 +12,4 @@ class Database {
         return $this->connection;
     }
 }
+$db = new Database('localhost', 'root', '', 'blog');

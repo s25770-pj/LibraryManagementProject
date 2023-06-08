@@ -1,12 +1,15 @@
 <?php
 session_start();
 
+if (isset($_SESSION['logged'])){
+    header("Location: ../blog.php");
+    die;
+}
+
 require_once '../Config/config.php';
-require_once '../Repository/registerRepo.php';
+require_once '../Repository/register_repo.php';
 
-$db = new Database('localhost', 'root', '', 'blog');
-
-$registerRepository = new registerRepository($db);
+$RegisterRepository = new RegisterRepository($db);
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
     $username = $_POST['username'];
@@ -48,11 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
     }
 
     if (empty($_SESSION['error']) && empty($_SESSION['username_err']) && empty($_SESSION['email_err']) && empty($_SESSION['password_err'])) {
-        if ($registerRepository->register($username, $hash_password, $email)) {
+        if ($RegisterRepository->register($username, $hash_password, $email)) {
+            session_destroy();
             header("Location: $login_page");
-            exit();
         } else {
-            $errors[] = "Wystąpił błąd podczas rejestracji. Spróbuj ponownie później.";
+            $_SESSION['error'] = "Wystąpił błąd podczas rejestracji. Spróbuj ponownie później.";
         }
     }
 }
@@ -73,61 +76,54 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
 
 <?php 
 if(isset($_SESSION['error'])) {
-    echo '<span class="error">' . $_SESSION['error'] . '</span><br />';
-    unset($_SESSION['error']);
+    echo '<span class="error">' . $_SESSION['error'] . '</span><br>';
 } else {
-    echo '<br />';
+    echo '<br>';
 }
 ?>
 
 <form method="POST">
     <input type="text" name="username" value="<?php if (isset($_SESSION['username'])) {
         echo $_SESSION['username'];
-        unset($_SESSION['username']);
-    } ?>" placeholder="Username"><br />
+    } ?>" placeholder="Username"><br>
 
     <?php 
     if(isset($_SESSION['username_err'])) {
-        echo '<span class="error">' . $_SESSION['username_err'] . '</span><br />';
-        unset($_SESSION['username_err']);
+        echo '<span class="error">' . $_SESSION['username_err'] . '</span><br>';
     } else {
-        echo '<br />';
+        echo '<br>';
     }
     ?>
 
     <input type="text" name="email" value="<?php if (isset($_SESSION['email'])) {
         echo $_SESSION['email'];
-        unset($_SESSION['email']);
     } ?>" placeholder="Email"><br />
 
     <?php 
     if(isset($_SESSION['email_err'])) {
-        echo '<span class="error">' . $_SESSION['email_err'] . '</span><br />';
-        unset($_SESSION['email_err']);
+        echo '<span class="error">' . $_SESSION['email_err'] . '</span><br>';
     } else {
-        echo '<br />';
+        echo '<br>';
     }
     ?>
 
     <input type="password" name="password" value="<?php if (isset($_SESSION['password'])) {
         echo $_SESSION['password'];
-        unset($_SESSION['password']);
     } ?>" placeholder="Password"><br /><br />
 
 
 
     <input type="password" name="second_password" value="<?php if (isset($_SESSION['second_password'])) {
         echo $_SESSION['second_password'];
-        unset($_SESSION['second_password']);
     } ?>" placeholder="Repeat password"><br />
 
     <?php 
     if(isset($_SESSION['password_err'])) {
-        echo '<span class="error">' . $_SESSION['password_err'] . '</span><br />';
-        unset($_SESSION['password_err']);
+        echo '<span class="error">' . $_SESSION['password_err'] . '</span><br>';
     } else {
-        echo '<br />';
+        echo '<br>';
     }
+    session_destroy();
     ?>
 
     <button type="submit" name="register">Register</button>

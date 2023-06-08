@@ -1,5 +1,11 @@
 <?php
-class loginRepository {
+
+if (isset($_SESSION['logged'])){
+    header("Location: ../index.php");
+    die;
+}
+
+class LoginRepository {
     private $db;
 
     public function __construct(Database $db) {
@@ -8,8 +14,8 @@ class loginRepository {
 
     public function login($username, $password) {
         $query = "SELECT * FROM user WHERE user_name = :username";
+        
         $statement = $this->db->getConnection()->prepare($query);
-
         $statement->bindParam(':username', $username);
         $statement->execute();
 

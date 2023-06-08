@@ -7,7 +7,7 @@ session_start();
 
 
 
-if (!isset($_SESSION['login']) || $_SESSION['access'] = 'user')
+if (!isset($_SESSION['login']) || $_SESSION['access'] == 'user')
 {
 
 	header('Location: ' . $index);
