@@ -1,18 +1,17 @@
+<link rel="stylesheet" href="../Style/header.css">
+
 <div class = "big_banner">
 
     <?php
 
     $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
     $filename = basename($parsedUrl['path']);
-    if($filename != 'index.php' && $filename != 'Service')
+    if($filename != 'page.php' && $filename != 'Service')
     {
 
         ?>
-
         <div id = "go_back">
-
             <button class = "button_back" onclick="window.location.href = '<?php echo $page; ?>'">Powrót do menu</button>
-
         </div>
     
 
@@ -28,8 +27,6 @@
         <?php 
 
         if ((!isset($_SESSION['login']))) {
-
-            //buttoni logowania i rejestracji
             
             echo '<div id = "logowanie">';
 
@@ -44,14 +41,6 @@
             echo '</div>'; 
 
         } else {
-
-            $connection = new mysqli($host, $db_user, $db_password, $db_name);
-
-            if ($connection->connect_errno) {
-
-                exit("Błąd połączenia z bazą danych: " .$connection->connect_errno);
-
-            }
 
             $id = $_SESSION['id'];
             $what_balance = "SELECT balance FROM wallets WHERE user_id = '$id'";
@@ -68,7 +57,6 @@
 
             }
 
-            //Przejście do portfela
             $add_balance = $_SESSION['balance'];
             if($_SESSION['access'] === 'admin') {
             echo '<div class = "menu" >';

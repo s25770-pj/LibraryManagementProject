@@ -1,7 +1,7 @@
 <?php
 
 require_once "../Includes/path.php";
-
+require_once $database;
 session_start();
 
 if(isset($_GET['book_id'])){
@@ -27,17 +27,7 @@ if(isset($_GET['book_id'])){
       }
     </style>
   </head>
-  <!-- <body> -->
-    <!-- <h1>Tytuł artykułu</h1>
-    <div class="excerpt">
-      <p>To jest fragment artykułu.</p>
-      <p id="read-more" class="content">To jest pełna treść artykułu.</p>
-    </div>
-    <a href="#read-more">Czytaj dalej</a>
-  </body> -->
   </html>
-
-
 
   <div class = "pod_bannerem">
 

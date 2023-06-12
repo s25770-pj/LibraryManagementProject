@@ -10,51 +10,45 @@ session_start();
 	<meta charset="utf-8" />
 	<title>Księgarnia internetowa</title>
     <script src="../JS/browser.js"></script>
-	<link rel="stylesheet" href="../Style/style.css">
+	<link rel="stylesheet" href="<?php echo $page_css; ?>">
 
 </head>
 
 <body>
 
-<?php
-require_once $header;
+    <?php
+    require_once $database;
+    require_once $header;
 
-?>
+    ?>
 
-<div class = 'pod_bannerem'>
+    <header>
+        <?php require_once $header; ?>
+    </header>
 
-    <div class = 'lewa'></div>
-
-    <div class = 'srodek'>
-
-        <div class = 'searching'></div>
-
-        <div id='bookResults'></div>
+    <main>
+        <section class="searching"></section>
+        <section id="bookResults"></section>
 
         <?php
-
-        if ((isset($_SESSION['login']))) {
-
-        $connection->close();
-
+        if (isset($_SESSION['login'])) {
+            $connection->close();
         }
-
-        ?> 
-                
-        <br /><br />
-
-        <?php
-
-        if(isset($_SESSION['error']))	echo $_SESSION['error'];
-        
         ?>
 
-    </div>
+        <br><br>
 
-    <div class = "prawa"></div> 
+        <?php
+        if (isset($_SESSION['error'])) {
+            echo $_SESSION['error'];
+        }
+        ?>
+    </main>
 
-</div>
+    <footer>
+        <p>&copy; <?php echo date('Y'); ?> Twoja Firma. Wszelkie prawa zastrzeżone.</p>
+    </footer>
 
+    <script src="../JS/script.js"></script>
 </body>
-
 </html>

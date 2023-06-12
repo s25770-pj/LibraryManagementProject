@@ -146,23 +146,6 @@ if((isset($_GET['book_id'])) && (isset($_POST['book_price']))) {
     }   
 } else {
     $_SESSION['HTML_injection'] = true;
-    ?>
-    <!DOCTYPE html>
-    <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <title>Document</title>
-        <link rel="stylesheet" href="../Style/inject.css">
-    </head>
-    <body>
-    <div id = "HTML_injection">
-        fdgdfghdfghgfdshfghfgdhfgdhdfghdfghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
-    </div>
-        
-    </body>
-    </html>
-    <?php
-    sleep(5);
 }
 
     $connection->close();

@@ -12,18 +12,9 @@ if (!isset($_SESSION['login']))
 
 if (isset($_POST["execute"]) && (isset($_POST['packet_price']))){
 
-    $connection = new mysqli($host, $db_user, $db_password, $db_name);
-    
-    if(!$connection) {
-
-        exit("Błąd połączenia z baza danych: " . mysqli_connect_error());
-
-    }
-
+    require_once $database;
 
     $id = $_SESSION['id'];
-
-    //Sprawdzenie czy można dodać dni premium
 
     $query = "SELECT premiumExpirationDate FROM users WHERE id = ?";
     $resultPremium = $connection->prepare($query);

@@ -12,6 +12,20 @@ if (!isset($_SESSION['login']))
 		exit();
 	}
 
+    $recharge_sum = '';
+
+if (isset($_POST['recharge'])) {
+    $recharge_value = $_POST['recharge'];
+
+    if ($recharge_value === '20') {
+        $recharge_sum = '20.00';
+    } elseif ($recharge_value === '50') {
+        $recharge_sum = '50.00';
+    } elseif ($recharge_value === '100') {
+        $recharge_sum = '100.00';
+    }
+}
+
 ?>
 <head>
 
@@ -26,74 +40,49 @@ if (!isset($_SESSION['login']))
 
 <div id = "packages">
 
-    <?php
-
-        if (isset($_POST['recharge_account'])) {
-            $recharge_sum = $_POST['recharge_account'];
-        }
-
-    ?>
-
     <div class = "sum">
         <form method = "POST">
-        <input type="hidden" name="recharge_account" value="20.00">
-        <input type="hidden" name="book_id" value="<?php $book_id ?>">
-        <input type="submit" name="recharge" value="20 zł" class = "button_sum 
+        <input type="hidden" name="recharge" value="20.00">
+        <input type="hidden" name="book_id" value="<?php echo $book_id; ?>">
+        <input type="submit" name="recharge_submit" value="20 zł" class = "button_sum 
         <?php 
-        if(isset($_POST['recharge_account']) && $_POST['recharge_account'] == '20.00') echo 'active'; ?>">
+        if($recharge_sum === '20.00') echo 'active'; ?>">
         </form>
     </div>
 
     <div class = "sum">
         <form method = "POST">
-        <input type="hidden" name="recharge_account" value="50.00">
-        <input type="hidden" name="book_id" value="<?php $book_id ?>">
-        <input type="submit" name="recharge" value="50 zł" class = "button_sum 
+        <input type="hidden" name="recharge" value="50.00">
+        <input type="hidden" name="book_id" value="<?php echo $book_id; ?>">
+        <input type="submit" name="recharge_submit" value="50 zł" class = "button_sum 
         <?php
-        if(isset($_POST['recharge_account']) && $_POST['recharge_account'] == '50.00') echo 'active'; ?>">
+        if($recharge_sum === '50.00') echo 'active'; ?>">
         </form>
     </div>
 
     <div class = "sum">
         <form method = "POST">
-        <input type="hidden" name="recharge_account" value="100.00">
-        <input type="hidden" name="book_id" value="<?php $book_id ?>">
-        <input type="submit" name="recharge" value="100 zł" class = "button_sum 
+        <input type="hidden" name="recharge" value="100.00">
+        <input type="hidden" name="book_id" value="<?php echo $book_id; ?>">
+        <input type="submit" name="recharge_submit" value="100 zł" class = "button_sum 
         <?php
-        if(isset($_POST['recharge_account']) && $_POST['recharge_account'] == '100.00') echo 'active'; ?>">
+        if($recharge_sum === '100.00') echo 'active'; ?>">
         </form>
     </div>
 
     <div class = "doladowanie">
     <?php
-    if (isset($_SESSION['book_id'])){
-
-        $book_id = $_SESSION['book_id'];
-        
-        echo '<form action ='. $add_balance .' method = "POST">';
-        if (isset($_POST['recharge_account'])) {
-        echo '<input type="hidden" name="recharge_account" value='.
-        $recharge_sum .'>';
-        echo '<input type="hidden" name="book_id" value='.$book_id.'>';
+        if (isset($_SESSION['book_id'])) {
+            $book_id = $_SESSION['book_id'];
         }
-        ?>
-
-        <input type="submit" name="recharge" value="Doładuj" class = "button">
-        </form>
-        <?php
-    } else {
-
-        echo '<form action ='. $add_balance .' method = "POST">';
-        if (isset($_POST['recharge_account'])) {
-        echo '<input type="hidden" name="recharge_account" value='.
-        $recharge_sum .'>';
-        }
-        ?>
-        <input type="submit" name="recharge" value="Doładuj" class = "button">
-        </form>
-        <?php
-    }
     ?>
+        <form action ="<?php echo $add_balance; ?>" method = "POST">
+        <input type="hidden" name="recharge_account" value="<?php echo $recharge_sum; ?>">
+        <?php if (isset($_SESSION['book_id'])) { ?>
+        <input type="hidden" name="book_id" value= "<?php echo $book_id; ?>">
+        <?php } ?>
+        <input type="submit" name="recharge_submit" value="Doładuj" class = "button">
+        </form>
     </div>
 
     <?php

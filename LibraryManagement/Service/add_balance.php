@@ -2,73 +2,71 @@
 
 <?php
 
-session_start();
-
-if (!isset($_SESSION['login']))
-{
-	header('Location: ' . $page);
-	exit();
-}
-
-if(isset($_POST['recharge_account'])){
-
 require_once '../Includes/path.php';
 
-$connection = new mysqli($host, $db_user, $db_password, $db_name);
+session_start();
 
-if ($connection->connect_errno) {
-
-    exit("Błąd połączenia z bazą danych: ". $connection->connect_errno);
-
+if (!isset($_SESSION['login'])) {
+	header('Location: ' . $page);
+	die();
 }
 
-$id = $_SESSION['id'];
+if(isset($_POST['recharge_account'])) {
 
-$query = ("SELECT balance FROM wallets WHERE user_id = '$id'");
-$result = $connection->query($query);
+    $recharge_sum = filter_input(INPUT_POST, 'recharge_account', FILTER_VALIDATE_FLOAT);
 
-while($row = $result->fetch_assoc()) {
+    if ($recharge_sum !== false) {
+        require_once $database;
+    
+        $id = $_SESSION['id'];
 
-$add_balance = $row['balance'];
-$recharge_sum = $_POST['recharge_account'];
+        $query = ("SELECT balance FROM wallets WHERE user_id = '$id'");
+        $result = $connection->query($query);
 
-$new_balance = $add_balance + $recharge_sum;
+        if ($result) {
 
-$queryUpdate = ("UPDATE wallets SET balance = '$new_balance' WHERE user_id = '$id'");
-$rez = $connection->query($queryUpdate);
+        $row = $result->fetch_assoc();
+        $add_balance = $row['balance'];
+        $new_balance = $add_balance + $recharge_sum;
 
-if($rez) {
+        $queryUpdate = ("UPDATE wallets SET balance = '$new_balance' WHERE user_id = '$id'");
+        $rez = $connection->query($queryUpdate);
 
-    if(isset($_POST['book_id'])){
-
-    $book_id = $_POST['book_id'];
-
-    echo '<div class = retreat>';
-    echo "<form action = '$book_details' method = 'GET'>";
-    echo '<input type = "hidden" name = "book_id" value ="' . $book_id . '">';
-    unset($_SESSION['book_id']);
-    echo '<input type = "submit" name = "retreat" value = "Powrót" class = "button">';
-
-    echo '</form>';
-    echo '</div>';
-
+        if($rez) {
+            if(isset($_POST['book_id'])){
+                $book_id = $_POST['book_id'];
+                ?>
+                <div class = retreat>
+                    <form action = "<?php echo $book_details; ?>" method = 'GET'>
+                    <input type = "hidden" name = "book_id" value ="<?php echo $book_id; ?>">
+                    <?php unset($_SESSION['book_id']); ?>
+                    <input type = "submit" name = "retreat" value = "Powrót" class = "button">
+                    </form>
+                </div>
+                <?php
+                } else {
+                    ?>
+                <div class = retreat>
+                    <form action = "<?php echo $page; ?>" method = 'GET'>
+                    <input type = "submit" name = "retreat" value = "Powrót" class = "button">
+                    </form>
+                </div>
+                <?php
+                }
+            } else {
+                echo "Błąd podczas aktualizacji danych: " . $connection->error;
+            } 
+        } else {
+            echo "Błąd podczas pobierania danych z bazy: " . $connection->error;
+        }
+        $connection->close();
     } else {
-        echo '<div class = retreat>';
-    echo "<form action = '$page' method = 'GET'>";
-    echo '<input type = "submit" name = "retreat" value = "Powrót" class = "button">';
-
-    echo '</form>';
-    echo '</div>';
+        echo <<<END
+        <div class = "wrong_recharge_value"> 
+        Błędna wartość doładowania.
+        </div>
+        END;
     }
-
-} else {
-    echo "Błąd podczas aktualizacji danych: " . $connection->error;
-}
-
-} 
-
-$connection->close();
-
 }
 
 

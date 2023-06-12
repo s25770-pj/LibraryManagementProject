@@ -1,0 +1,123 @@
+.big_banner {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100vw;
+    justify-content: center;
+    background-color: rgb(233, 232, 232);
+    font-family: Montserrat, sans-serif;
+    padding: 20px;
+}
+
+#go_back,
+#logout {
+    display: flex;
+    width: 15%;
+    align-items: top;
+    height: 30%;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.banner {
+    display: flex;
+    box-sizing: border-box;
+    justify-content: flex-end;
+    align-items: center;
+    background-color: rgb(233, 232, 232);
+    width: 70%;
+    height: 20%;
+    margin-top: 1%;
+    border-top: solid 1px lightgray;
+    border-bottom: solid 1px lightgray;
+}
+
+.menu {
+    height: 80%;
+    min-width: 7%;
+    margin-left: 1%;
+}
+
+.menu form {
+    border: none;
+    background-color: rgb(233, 232, 232);
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+.menu input {
+    border: none;
+    background-color: rgb(233, 232, 232);
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    font-family: Montserrat, sans-serif;
+}
+
+.menu input:hover {
+    border: none;
+    background-color: rgb(206, 206, 255);
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+}
+
+#cart_array {
+    display: flex;
+    width: 8%;
+    justify-content: center;
+    font-size: small;
+    margin-left: 1%;
+}
+
+#cart_array:hover {
+    background-color: rgb(206, 206, 255);
+}
+
+#cart {
+    display: flex;
+    margin-top: 5%;
+    text-align: center;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+img {
+    cursor: pointer;
+    margin-right: 5px;
+}
+
+.button_back {
+    display: inline-block;
+    padding: 5px 25px;
+    cursor: pointer;
+}
+
+.button:hover,
+.button_back:hover {
+    background-color: rgb(206, 206, 255);
+}
+
+#searching {
+    display: flex;
+    width: 100%;
+    height: 15%;
+    padding-top: 4%;
+    justify-content: center;
+}
+
+#searching input,
+#searching select {
+    border-top: none;
+    border-left: none;
+    border-right: none;
+    background-color: rgb(233, 232, 232);
+    border-bottom: solid 1px lightgray;
+    margin-left: 5px;
+}
+
+@media (max-width: 768px) {
+    .big_banner {
+        padding-bottom: 50px;
+    }
+}

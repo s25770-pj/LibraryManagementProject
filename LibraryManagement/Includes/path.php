@@ -2,7 +2,8 @@
 
     require_once "../SQL_Config/connect.php";
 
-    $data_base = "../SQL_Config/connect.php";
+    $sql_config = "../SQL_Config/connect.php";
+    $database = "../Includes/connection.php";
 
     $images = "../Images/";
 
@@ -28,8 +29,5 @@
 
     $header = "../Includes/header.php";
 
-    $connection = new mysqli($host, $db_user, $db_password, $db_name);
-      
-      if ($connection->connect_errno) {
-          exit("Błąd połączenia z bazą danych: " . $connection->connect_errno);
-      }
+    $style_css = "../Style/style.css";
+    $page_css = "../Style/xd.css";

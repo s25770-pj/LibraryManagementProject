@@ -1,6 +1,7 @@
 <?php
 
 require_once "../Includes/path.php";
+require_once $database;
 
 //searching książki po wpisanej frazie
 if (isset($_POST['phrase']) && !empty($_POST['phrase']) && empty($_POST['category'])) {
@@ -64,7 +65,7 @@ if ($result->num_rows > 0) {
 
   } else {
 
-    echo 'Brak książek pasujących do wyszukiwanej frazy.';
+    echo '<p> Brak książek pasujących do wyszukiwanej frazy. </p>';
 
   }
 
