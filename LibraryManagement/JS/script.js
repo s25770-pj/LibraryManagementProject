@@ -5,14 +5,13 @@ $(document).ready(function() {
         url: '../Includes/refresh_meter.php',
         type: 'GET',
         success: function(response) {
-          $('#counter').html(response); // Aktualizuj wartość licznika na stronie
+          $('#counter').html(response);
         },
         error: function() {
           console.log('Wystąpił błąd podczas aktualizacji licznika.');
         }
       });
     }
-  
-    // Uruchamiaj aktualizację licznika co określony czas (np. co sekundę)
+
     setInterval(updateCounter, 1000);
   });

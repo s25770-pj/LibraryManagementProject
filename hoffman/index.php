@@ -24,11 +24,10 @@
 
     <?php
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        // Funkcja do zliczania częstości wystąpień znaków
         function countOccurrences($text) {
             $occurrences = array();
-            $text = str_replace(' ', '', $text); // Usunięcie spacji
-            $text = preg_replace('/[^a-zA-Z]/', '', $text); // Usunięcie znaków niebędących literami
+            $text = str_replace(' ', '', $text);
+            $text = preg_replace('/[^a-zA-Z]/', '', $text);
             $length = strlen($text);
             
             for ($i = 0; $i < $length; $i++) {
@@ -43,7 +42,6 @@
             return $occurrences;
         }
 
-        // Funkcja do budowania drzewa Huffmana
         function buildHuffmanTree($occurrences) {
             $nodes = array();
             foreach ($occurrences as $char => $count) {
@@ -71,7 +69,6 @@
             return $nodes[0];
         }
 
-        // Funkcja do generowania kodów dla znaków
         function generateCodes($node, $prefix = '') {
             $codes = array();
             
@@ -87,9 +84,21 @@
             return $codes;
         }
 
+        function encodeText($text, $codes) {
+            $encodedText = '';
+            $length = strlen($text);
 
-        // Funkcja do wyświetlania wyników
-        function displayResults($occurrences, $codes) {
+            for ($i = 0; $i < $length; $i++) {
+                $char = $text[$i];
+                if (isset($codes[$char])) {
+                    $encodedText .= $codes[$char];
+                }
+            }
+
+            return $encodedText;
+        }
+
+        function displayResults($occurrences, $codes, $encodedText) {
             echo '<h2>Wyniki:</h2>';
             echo '<table>';
             echo '<tr><th>Znak</th><th>Kod</th><th>Liczba wystąpień</th></tr>';
@@ -103,6 +112,9 @@
             }
 
             echo '</table>';
+
+            echo '<h3>Zakodowany tekst:</h3>';
+            echo '<p>' . $encodedText . '</p>';
         }
         
 
@@ -110,19 +122,11 @@
         $occurrences = countOccurrences($text);
         $huffmanTree = buildHuffmanTree($occurrences);
         $codes = generateCodes($huffmanTree);
+        $encodedText = encodeText($text, $codes);
 
-        // foreach ($codes as &$code)
-        // {
-        //     if(strlen($code) < count($codes))
-        //     {
-        //         $code=str_repeat('0',(count($codes)-strlen($code)-2)).$code;
-        //     }
-            
-        // }
-
-        displayResults($occurrences, $codes);
+        displayResults($occurrences, $codes, $encodedText);
     }
-    
     ?>
+
 </body>
 </html>

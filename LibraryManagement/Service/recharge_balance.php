@@ -8,7 +8,7 @@ session_start();
 
 if (!isset($_SESSION['login']))
 	{
-		header('Location: ' . $index);
+		header('Location: ' . $page);
 		exit();
 	}
 
@@ -98,7 +98,7 @@ if (!isset($_SESSION['login']))
 
     <?php
 
-    echo '<form action = '. $index .'>';
+    echo '<form action = '. $page .'>';
     echo '<input type = "submit" name = "retreat" value = "Powrót" class = "button">';
     echo '</form>';
 

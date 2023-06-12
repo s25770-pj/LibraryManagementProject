@@ -17,7 +17,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
     $password = $_POST['password'];
 
     if ($LoginRepository->login($username, $password)) {
-        header("Location:". $index);
+        header("Location:". $page);
         die();
     } else {
         $error = "Nieprawidłowy login lub hasło";
@@ -30,17 +30,32 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['username'])) {
 <head>
     <meta charset="UTF-8">
     <title>Log in screen</title>
+    <link rel="stylesheet" href="<?php echo $login_css?>">
 </head>
 <body>
-    <form method='POST'> 
-        <input type="text" name="username"><br />
-        <input type="password" name="password"><br />
-        <button type="submit" name="login">Log in</button>
-    </form>
-
-    <a href="<?php echo $register_page; ?>" class="button">Register</a>
-
+    <div id="login_box">
+        <h2>Login</h2>
+        <form method='POST' id="login_form"> 
+            <div class="user_box">
+            <input type="text" name="username" required><br />
+            <label>Username</label>
+            </div>
+            <div class="user_box">
+            <input type="password" name="password" required><br />
+            <label>Password</label>
+            </div>
+            <a href="" onclick="document.getElementById('login_form').submit(); return false;">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                Login
+            </a>
+        </form>
+    </div>
     <?php
+    echo $username;
+    echo $password;
     if (isset($error)):?>
     <p><?php echo $error; ?></p>
     <?php endif; ?>

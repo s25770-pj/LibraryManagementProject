@@ -2,45 +2,41 @@
 
 require_once "../Includes/path.php";
 
-$connection = new mysqli($host, $db_user, $db_password, $db_name);
-
-if ($connection->connect_errno) {
-
-    exit("Błąd połączenia z bazą danych: " . $connection->connect_errno);
-
-}
-
 //searching książki po wpisanej frazie
-if (isset($_GET['phrase']) && !empty($_GET['phrase']) && empty($_GET['category'])) {
+if (isset($_POST['phrase']) && !empty($_POST['phrase']) && empty($_POST['category'])) {
 
-    $phrase = $_GET['phrase'];
-    $category = $_GET['category'];
+    $phrase = $_POST['phrase'];
+    $phrase = urlencode($phrase);
+    $category = $_POST['category'];
     $query = "SELECT * FROM stock WHERE title LIKE '%$phrase%' OR author LIKE '%$phrase%'";
 
 //Po podanej frazie i gatunku
-} else if (isset($_GET['phrase']) && !empty($_GET['phrase']) && !empty($_GET['category'])) {
+} else if (isset($_POST['phrase']) && !empty($_POST['phrase']) && !empty($_GET['category'])) {
     
-    $phrase = $_GET['phrase'];
-    $category = $_GET['category'];
+    $phrase = $_POST['phrase'];
+    $phrase = urlencode($phrase);
+    $category = $_POST['category'];
     $query = "SELECT * FROM stock WHERE (title LIKE '%$phrase%' OR author LIKE '%$phrase%') AND category = '$category'";
 
 //Po podanym gatunku
-} else if (isset($_GET['category']) && !empty($_GET['category'])){ 
+} else if (isset($_POST['category']) && !empty($_POST['category'])){ 
 
     $phrase = '';
-    $category = $_GET['category'];
+    $phrase = urlencode($phrase);
+    $category = $_POST['category'];
     $query = "SELECT * FROM stock WHERE category = '$category'";
 
 //Kiedy nie podano ani frazy, ani gatunku
 } else {
 
     $phrase = '';
+    $phrase = urlencode($phrase);
     $category = '';
     $query = "SELECT * FROM stock";
 }
 $result = $connection->query($query);
 
-if ($result->num_rows > 0 || empty($phrase) || empty($category)) {
+if ($result->num_rows > 0) {
 
     echo '<ul>';
 

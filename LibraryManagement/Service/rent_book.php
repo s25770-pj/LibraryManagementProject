@@ -6,7 +6,7 @@ session_start();
 
 if (!isset($_SESSION['login'])) {
 
-		header('Location: ' . $index);
+		header('Location: ' . $page);
 		exit();
 
 	}
@@ -20,11 +20,26 @@ if((isset($_GET['book_id'])) && (isset($_POST['book_price']))) {
         exit("Błąd połączenia z bazą danych: " . $connection->connect_errno);
 
     }
-
-    $id = $_SESSION['id'];
+    $book_price = $_POST['book_price'];
     $book_id = $_GET['book_id'];
 
-    //Pobranie salda uzytkownika z bazy
+    $HTML_injection_query = ("SELECT price FROM stock WHERE id = ?");
+    $HTML_injection = $connection->prepare($HTML_injection_query);
+
+    if ($HTML_injection) {
+        $HTML_injection->bind_param("i", $book_id);
+        $HTML_injection->execute();
+    }
+    $is_injected = $HTML_injection->get_result();
+
+    if($is_injected->num_rows > 0) {
+        $row_book = $is_injected->fetch_assoc();
+        $real_price = $row_book['price'];
+    }
+
+    if($book_price === $real_price) {
+
+    $id = $_SESSION['id'];
 
     $what_balance_query = ("SELECT * FROM wallets WHERE user_id = ?");
     $what_balance = $connection->prepare($what_balance_query);
@@ -64,7 +79,7 @@ if((isset($_GET['book_id'])) && (isset($_POST['book_price']))) {
             }
 
             echo '<div class = "rent">';
-            echo '<form action = '. $index .' method = "POST">';
+            echo '<form action = '. $page .' method = "POST">';
             echo '<input type = "hidden" name = "book_id" value ="' . $book_id . '">';
             echo '<input type = "hidden" name = "book_price" value ="' . $price . '">';
             echo '<input type = "submit" name = "rent" value = "Powrót">';
@@ -102,7 +117,6 @@ if((isset($_GET['book_id'])) && (isset($_POST['book_price']))) {
             }
 
         }
-
         //Wstawienie nowej transakcji do bazy
 
         $new_transaction = ("INSERT INTO transactions (wallet_id, transaction_type, balance, date_time) VALUES (?, ?, ?, ?)");
@@ -112,7 +126,6 @@ if((isset($_GET['book_id'])) && (isset($_POST['book_price']))) {
 
             $wallet_id = $row['id'];
             $purchase = "purchase";
-            $book_price = $_POST['book_price'];
             $date_time = date('Y-m-d H:i:s');
 
             $res->bind_param("isds", $wallet_id, $purchase, $book_price, $date_time);
@@ -131,10 +144,30 @@ if((isset($_GET['book_id'])) && (isset($_POST['book_price']))) {
         }
 
     }   
+} else {
+    $_SESSION['HTML_injection'] = true;
+    ?>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+        <link rel="stylesheet" href="../Style/inject.css">
+    </head>
+    <body>
+    <div id = "HTML_injection">
+        fdgdfghdfghgfdshfghfgdhfgdhdfghdfghhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
+    </div>
+        
+    </body>
+    </html>
+    <?php
+    sleep(5);
+}
 
     $connection->close();
 
-    header('Location: ' . $index);
+    header('Location: ' . $page);
 
 }
 

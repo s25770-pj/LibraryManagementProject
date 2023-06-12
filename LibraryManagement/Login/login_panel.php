@@ -6,7 +6,7 @@ session_start();
 
 if (isset($_SESSION['login']))
 	{
-		header('Location: '.$index);
+		header('Location: '.$page);
 		exit();
 	}
 
@@ -28,12 +28,9 @@ if (isset($_SESSION['login']))
     <input type="submit" value="Zaloguj się" />
 
     <?php
-
-    echo '<p>[ <a href='. $index .'>Powrót</a> ]</p>';
-
+    echo '<p>[ <a href='. $page .'>Powrót</a> ]</p>';
     ?>
 
 </form>
-    
 </body>
 </html>

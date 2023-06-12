@@ -7,7 +7,7 @@
 	if ((!isset($_POST['login'])) || (!isset($_POST['password'])))
 	{
 
-		header('Location: '.$index);
+		header('Location: '.$page);
 		exit();
 	}
 
@@ -49,7 +49,7 @@
 
 					$result->free_result();
 
-					header('Location: '. $index);
+					header('Location: '. $page);
 				} else {
 
 					$_SESSION['error'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';

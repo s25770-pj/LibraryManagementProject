@@ -8,8 +8,9 @@ if (!isset($_SESSION['logged'])) {
 require_once '../Config/path.php';
 
 	session_start();
+    unset($_SESSION['logged']);
 	
-	session_unset();
+	session_destroy();
     
-    header("Location: $login");
+    header("Location: $login_page");
 	

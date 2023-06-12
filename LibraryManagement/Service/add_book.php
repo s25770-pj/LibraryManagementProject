@@ -10,7 +10,7 @@ session_start();
 if (!isset($_SESSION['login']) || $_SESSION['access'] == 'user')
 {
 
-	header('Location: ' . $index);
+	header('Location: ' . $page);
 	exit();
 
 }
@@ -77,7 +77,7 @@ if (!isset($_SESSION['login']) || $_SESSION['access'] == 'user')
 
         </form>
         <?php
-        echo "<form action = '$index'>";
+        echo "<form action = '$page'>";
         ?>
         <input type = "submit" name = "retreat" value = "Powrót" class = "button">
         

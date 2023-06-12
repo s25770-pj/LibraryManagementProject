@@ -6,7 +6,7 @@ require_once '../Includes/path.php';
 	
 	if (!isset($_SESSION['successfull_registration']))
 	{
-		header('Location: '.$index);
+		header('Location: '.$page);
 		exit();
 	}
 	else
@@ -42,7 +42,7 @@ require_once '../Includes/path.php';
 	Dziękujemy za rejestrację w serwisie! Możesz już zalogować się na swoje konto!<br /><br />
 	<?php
 
-	echo' <a href='. $index .'>Zaloguj się na swoje konto!</a>';
+	echo' <a href='. $page .'>Zaloguj się na swoje konto!</a>';
 	?>
 	<br /><br />
 

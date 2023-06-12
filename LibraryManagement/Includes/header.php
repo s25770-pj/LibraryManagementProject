@@ -11,7 +11,7 @@
 
         <div id = "go_back">
 
-            <button class = "button_back" onclick="window.location.href = '<?php echo $index; ?>'">Powrót do menu</button>
+            <button class = "button_back" onclick="window.location.href = '<?php echo $page; ?>'">Powrót do menu</button>
 
         </div>
     
@@ -39,7 +39,7 @@
                 
             echo '<div id = "rejestracja">';
 
-                echo '<p>[ <a href="'. $register .'">Rejestracja</a> ]</p>';
+                echo '<p>[ <a href="'. $registration .'">Rejestracja</a> ]</p>';
 
             echo '</div>'; 
 
@@ -130,45 +130,39 @@
     echo "</div>";
 
 
-    if(!empty($filename)) {
 
             
-        ?>
+    ?>
         
-        <div id = "logout">
-            <?php
-            if(isset($_SESSION['login'])){
-            ?>
-            <button class = "button_back" onclick="window.location.href = '<?php echo $logout; ?>'">Wyloguj się</button>
-            <?php
-            }
-            ?>
-
-        </div>
+    <div id = "logout">
         <?php
-        if($filename == 'index.php' || $filename == 'Service') {
+        if(isset($_SESSION['login'])){
+        ?>
+        <button class = "button_back" onclick="window.location.href = '<?php echo $logout; ?>'">Wyloguj się</button>
+        <?php
+        }
         ?>
 
-        <div id = "searching">
+    </div>
+    <?php
+    if($filename == 'page.php') {
+        ?>
 
-            <label for="what_category">
-
-            <select id="what_category" oninput="searchBooks()" class = "search_category">
-                <option value="" selected>Wszystkie gatunki</option>
-                <option value="Thriller">Thriller</option>
-                <option value="Fantastyka">Fantastyka</option>
-                <option value="Akcja">Akcja</option>
-                <option value="Romans">Romans</option>
+        <div id="searching">
+        <label for="what_category">
+            <select id="what_category" onchange="searchBooks()" class="search_category">
+            <option value="" selected>Wszystkie gatunki</option>
+            <option value="Thriller">Thriller</option>
+            <option value="Fantastyka">Fantastyka</option>
+            <option value="Akcja">Akcja</option>
+            <option value="Romans">Romans</option>
             </select>
+        </label>
 
-            </label>
-
-            <input type="text" id="find_phrase" placeholder="Wyszukaj książkę lub autora" oninput="searchBooks()" class="find_text">
-
+        <input type="text" id="find_phrase" placeholder="Wyszukaj książkę lub autora" oninput="searchBooks()" class="find_text">
         </div>
 
-    <?php
-        }
+        <?php
     }
 
     ?>

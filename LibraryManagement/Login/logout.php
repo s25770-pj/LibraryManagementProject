@@ -6,6 +6,6 @@ require_once '../Includes/path.php';
 	
 	session_unset();
 	
-	header('Location: '.$index);
+	header('Location: '.$page);
 
 ?>

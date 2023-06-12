@@ -4,9 +4,9 @@ require_once '../Config/config.php';
 require_once '../Repository/article_repo.php';
 
 if (!isset($_SESSION['logged'])){
-    header("Location: $login");
+    header("Location: $login_page");
     die;
-}
+} 
 
 $db = new Database('localhost', 'root', '', 'blog');
 $articleRepository = new ArticleRepository($db);

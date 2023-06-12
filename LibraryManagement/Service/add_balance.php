@@ -6,7 +6,7 @@ session_start();
 
 if (!isset($_SESSION['login']))
 {
-	header('Location: ' . $index);
+	header('Location: ' . $page);
 	exit();
 }
 
@@ -54,7 +54,7 @@ if($rez) {
 
     } else {
         echo '<div class = retreat>';
-    echo "<form action = '$index' method = 'GET'>";
+    echo "<form action = '$page' method = 'GET'>";
     echo '<input type = "submit" name = "retreat" value = "Powrót" class = "button">';
 
     echo '</form>';

@@ -7,7 +7,7 @@
 	if (!isset($_SESSION['login']))
 	{
 
-		header('Location: $index');
+		header('Location: $page');
 		exit();
 
 	}
@@ -49,7 +49,7 @@ if($date_time<$end) {
 	}
 	echo '<p>[ <a href='. $rentals .'>Historia renten!</a> ]</p>';
 	echo '<p>[ <a href='. $package_premium .'>Kup karnet premium</a> ]</p>';
-	echo '<p>[ <a href='. $index .'>Powrót</a> ]</p>';
+	echo '<p>[ <a href='. $page .'>Powrót</a> ]</p>';
 	
 ?>
 
