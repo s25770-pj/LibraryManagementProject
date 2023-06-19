@@ -9,6 +9,9 @@
 
     $page = "../Page/page.php";
     $user_panel = "../Page/user_panel.php";
+    $recharge_balance = "../Page/recharge_balance.php";
+    $book_details = "../Page/book_details.php";
+    $buy_premium = "../Page/buy_premium.php";
 
     $premium = "../Service/premium_purchase.php";
     $package_premium = "../Page/package_premium.php";
@@ -19,7 +22,6 @@
 
     $registration = "../Register/registration.php";
 
-    $book_details = "../Page/book_details.php";
     $add_book = "../Service/add_book.php";
     $rent_book = "../Service/rent_book.php";
     $rentals = "../Storage/rentals.php";

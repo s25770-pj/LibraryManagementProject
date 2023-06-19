@@ -19,7 +19,6 @@ session_start();
     <?php
     require_once $database;
     require_once $header;
-
     ?>
 
     <header>
