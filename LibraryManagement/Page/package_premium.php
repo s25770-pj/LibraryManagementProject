@@ -19,7 +19,7 @@ if (!isset($_SESSION['login']))
     <title>Kup Karnet Premium</title>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="../JS/script.js"></script>
-    <link rel="stylesheet" href="../Style/xd.css">
+    <link rel="stylesheet" href="../Style/page.css">
 </head>
 <body>
     <header>
@@ -31,9 +31,8 @@ if (!isset($_SESSION['login']))
             <?php
                 $id = $_SESSION['id'];
                 $date_time = new DateTime(date('Y-m-d H:i:s'));
-            
-                echo "<p>Data i czas serwera: <br>" . $date_time->format('Y-m-d H:i:s') . "</p>";
                 $today = $date_time->format('Y-m-d H:i:s');
+                
                 require_once $database;
                 
                 $query = "SELECT premiumExpirationDate FROM users WHERE id = $id ";

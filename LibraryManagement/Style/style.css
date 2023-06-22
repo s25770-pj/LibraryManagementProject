@@ -8,7 +8,11 @@ body {
     align-content: flex-start;
     justify-content: center;
 }
-
+p
+{
+    word-wrap:break-word;
+    width: 100%;
+}
 .big_banner {
     display: flex;
     flex-wrap: wrap;

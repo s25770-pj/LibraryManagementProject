@@ -4,9 +4,11 @@
 
     <?php
 
+    require_once '../Includes/path.php';
+
     $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
     $filename = basename($parsedUrl['path']);
-    if($filename != 'page.php' && $filename != 'Service')
+    if($filename != 'index.php' && $filename != 'Service')
     {
 
         ?>
@@ -23,23 +25,16 @@
 
     <div class = 'banner'>
 
-
         <?php 
 
         if ((!isset($_SESSION['login']))) {
-            
-            echo '<div id = "logowanie">';
+            echo '<div class = "menu">';
+            echo '<button class="button_back" onclick="window.location.href = \'' . $login_panel . '\'">Logowanie</button>';
+            echo '</div>';
 
-                echo '<p>[ <a class = "p" href="'. $login_panel .'">Logowanie</a> ]</p>';
-
-            echo '</div>'; 
-                
-            echo '<div id = "rejestracja">';
-
-                echo '<p>[ <a href="'. $registration .'">Rejestracja</a> ]</p>';
-
-            echo '</div>'; 
-
+            echo '<div class = "menu" >';
+            echo '<button class="button_back" onclick="window.location.href = \'' . $registration . '\'">Rejestracja</button>';
+            echo '</div>';
         } else {
 
             $id = $_SESSION['id'];
@@ -95,14 +90,6 @@
 
             echo '</div>'; 
 
-            echo '<div class = "menu">';
-
-                echo '<form action = "'.$user_panel.'">';
-                echo '<input type = "submit" value = "Profil">';
-                echo '</form>';
-
-            echo '</div>';
-
             $add_balance = number_format($add_balance, 2, ',', ' ') . " zł";
 
             echo '<div class = "menu">';
@@ -133,17 +120,24 @@
 
     </div>
     <?php
-    if($filename == 'page.php') {
+    if($filename == 'index.php' || $filename == 'Page' ){
         ?>
 
         <div id="searching">
+            
         <label for="what_category">
-            <select id="what_category" onchange="searchBooks()" class="search_category">
-            <option value="" selected>Wszystkie gatunki</option>
-            <option value="Thriller">Thriller</option>
-            <option value="Fantastyka">Fantastyka</option>
-            <option value="Akcja">Akcja</option>
-            <option value="Romans">Romans</option>
+            <select id="what_category" onchange="searchBooks()" class="search_category"><option value="">Wybierz categorie</option>
+            <?php 
+            
+            var_dump('ok');
+            $query = "SELECT name FROM category";
+            $result=$connection->query($query);
+            var_dump($rows);           
+            while($row = $result->fetch_assoc())
+            {
+                echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
+            }
+            ?>
             </select>
         </label>
 

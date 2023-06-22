@@ -7,15 +7,8 @@ if (!isset($_SESSION['login']))
 	header('Location: ' . $page);
 	exit();
 }
-
 require_once '../Includes/path.php';
 
-$connection = new mysqli($host, $db_user, $db_password, $db_name);
-
-    if ($connection->connect_errno!=0)
-	{
-		echo "Error: ".$connection->connect_errno;
-	}
 
     //Pobieranie z bazy danych date konca premium
     $query = "SELECT premiumExpirationDate FROM users WHERE id = ? ";

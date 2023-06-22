@@ -5,10 +5,8 @@ require_once "../Includes/path.php";
 session_start();
 
 if (!isset($_SESSION['login'])) {
-
 		header('Location: ' . $page);
 		exit();
-
 	}
 
 if((isset($_GET['book_id'])) && (isset($_POST['book_price']))) {
@@ -16,9 +14,7 @@ if((isset($_GET['book_id'])) && (isset($_POST['book_price']))) {
     $connection = new mysqli($host, $db_user, $db_password, $db_name);
 
     if ($connection->connect_errno) {
-
         exit("Błąd połączenia z bazą danych: " . $connection->connect_errno);
-
     }
     $book_price = $_POST['book_price'];
     $book_id = $_GET['book_id'];
@@ -57,25 +53,18 @@ if((isset($_GET['book_id'])) && (isset($_POST['book_price']))) {
         $price = $_POST['book_price'];
         $balance = $row['balance'];
         $new_balance = $balance - $price;
-
-        //Zmiana salda na te po purchaseie
         
         $set_new_balance = ("UPDATE wallets SET balance = ? WHERE user_id = ?");
         $rez = $connection->prepare($set_new_balance);
         
         if($rez) {
-
             $rez->bind_param("di", $new_balance, $id);
             $rez->execute();
 
             if($rez->affected_rows > 0) {
-
                 echo 'Dane zostaly wstawione poprawnie';
-
             } else {
-
                 echo 'Dane nie zostaly wstawione poprawnie';
-
             }
 
             echo '<div class = "rent">';
@@ -88,12 +77,8 @@ if((isset($_GET['book_id'])) && (isset($_POST['book_price']))) {
             $rez->close();
 
         } else {
-
         echo "Błąd przygotowania zapytania: " . $connection->error;
-
         }
-
-        //Wstawianie nowego wypożyczenia do bazy
 
         $new_rental = ("INSERT INTO rentals (user_id, book_id, rent_date, return_date) VALUES (?, ?, ?, ?)");
         $result = $connection->prepare($new_rental);
@@ -107,17 +92,12 @@ if((isset($_GET['book_id'])) && (isset($_POST['book_price']))) {
             $result->execute();
 
             if ($result->affected_rows > 0) {
-
                 echo 'Dane zostały wstawione poprawnie.';
-
             } else {
-
                 echo 'Błąd podczas wstawiania danych.';
-
             }
 
         }
-        //Wstawienie nowej transakcji do bazy
 
         $new_transaction = ("INSERT INTO transactions (wallet_id, transaction_type, balance, date_time) VALUES (?, ?, ?, ?)");
         $res = $connection->prepare($new_transaction);
@@ -132,13 +112,9 @@ if((isset($_GET['book_id'])) && (isset($_POST['book_price']))) {
             $res->execute();
 
             if($res->affected_rows > 0) {
-
                 echo 'Dane zostały wstawione poprawnie.';
-
             } else {
-
                 echo 'Błąd podczas wstawiania danych.';
-
             }
             
         }

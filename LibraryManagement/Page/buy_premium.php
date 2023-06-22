@@ -29,7 +29,7 @@ if (isset($_POST['buypremium'])) {
 ?>
 <head>
 
-<link rel="stylesheet" href="../Style/idn.css">
+<link rel="stylesheet" href="../Style/main.css">
 
 <style>body{background-color: black;}</style>
 </head>

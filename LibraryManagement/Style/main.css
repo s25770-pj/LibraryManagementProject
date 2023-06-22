@@ -14,6 +14,7 @@ body,html {
     font-family: Arial, Helvetica, sans-serif;
 }
 
+
 #background {
     background-image: var(--book-image);
     -webkit-background-size: cover;
@@ -83,5 +84,5 @@ option {
 }
 
 table {
-    margin-left: 25%;
+    margin-left: 30%;
 }

@@ -1,0 +1,141 @@
+* {
+    margin-right: 0;
+}
+
+html {
+    background-color: #f4f4f4;
+}
+
+body {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-content: flex-start;
+}
+
+.rental {
+    width: 90%;
+    padding: 5px;
+    border: #333 solid 2px;
+    border-radius: 5px;
+    background-color: lightgray;
+    min-height: 90%;
+}
+
+#go_back {
+    display: flex;
+    width: 15%;
+    align-items: top;
+    height: 30%;
+    justify-content: center;
+    cursor: pointer;
+}
+
+.button_back {
+    display: inline-block;
+    padding: 5px 25px;
+    cursor: pointer;
+}
+
+.button_back:hover {
+    background-color: rgb(206, 206, 255);
+}
+
+
+.book-list {
+    display: grid;
+    grid-template-columns: repeat(4, 25%);
+    grid-gap: 10px;
+    margin-bottom: 20px;
+    border: #333 solid 2px;
+    background-color: #fff;
+    width: 97.5%;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.h1 {
+    width: 100%;
+    height: 10%;
+}
+h2 {
+    color: #333;
+    margin: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 20%;
+    height: 50%; 
+}
+
+.book-list ul {
+    list-style-type: none;
+    padding-left: 0;
+    width: 100%;
+    min-height: 100%;
+}
+
+.book-list li {
+    margin-bottom: 10px;
+    width: 100%;
+    margin-right: 0;
+}
+
+.book-list li strong {
+    font-weight: bold;
+}
+
+.book-list li a {
+    color: #337ab7;
+    text-decoration: none;
+}
+
+.book-list li a:hover {
+    text-decoration: underline;
+}
+
+.no-books {
+    color: red;
+}
+
+.return-link {
+    margin-top: 20px;
+    text-align: right;
+}
+
+
+
+@media (max-width: 768px) {
+    h2 {
+        width: 70%;
+    }
+}
+
+@media (min-width: 769px) and (max-width: 900px) {
+    h2 {
+        width: 57%;
+    }
+}
+
+@media (min-width: 901px) and (max-width: 1099px) {
+    h2 {
+        width: 48%;
+    }
+}
+
+@media (min-width: 1100px) and (max-width: 1449px) {
+    h2 {
+        width: 40%;
+    }
+}
+
+@media (min-width: 1450px) and (max-width: 2100px) {
+    h2 {
+        width: 30%;
+    }
+}
+
+@media (min-width: 2101px) {
+    h2 {
+        width: 21%;
+    }
+}

@@ -23,7 +23,7 @@ if (!isset($_SESSION['login']) || $_SESSION['access'] == 'user')
 
     <meta charset="UTF-8">
     <title>Panel Administratora</title>
-    <link rel="stylesheet" href="../Style/idn.css">
+    <link rel="stylesheet" href="../Style/main.css">
 
 </head>
 <body>
@@ -98,19 +98,18 @@ if (!isset($_SESSION['login']) || $_SESSION['access'] == 'user')
 
     if(isset($_POST['type'])) {
         
-        //Ustawianie id w bazie danych po ilosci recordow
         $title = $_POST['title'];
         $author = $_POST['author'];
         $category = $_POST['category'];
 
-       // $book_id = "SELECT COUNT(*) as total FROM stock";
-        $categoryFormData = "SELECT `name` FROM `category`";
+        $categoryFormData = "SELECT `name`,`id` FROM `category`";
         $res = $connection->query($categoryFormData);
         $isCategory=false;
         while ($row = $res->fetch_assoc())
         {
             if($row['name'] == $category)
             {
+                $idCategory=$row['id'];
                 $isCategory=true;
                 break;
             }
@@ -129,10 +128,6 @@ if (!isset($_SESSION['login']) || $_SESSION['access'] == 'user')
             exit();
         }
 
-
-        
-        //Sprawdzenie, czy isnieje book o takiej nazwie
-
         $query = "SELECT * FROM stock WHERE title = ?";
         $stmt = $connection->prepare($query);
         $stmt->bind_param("s", $title);
@@ -145,15 +140,13 @@ if (!isset($_SESSION['login']) || $_SESSION['access'] == 'user')
 
         } else {
 
-            //Dodanie książki do księgarni
-
             if (empty($title) || empty($author) || empty($category) || empty($type) || empty($price) || empty($description)) {
                     echo "Wszystkie pola formularza są wymagane.";
             } else {
 
             $insertQuery = "INSERT INTO stock (title, author, category, type, price, description) VALUES (?, ?, ?, ?, ?, ?)";
             $insertStmt = $connection->prepare($insertQuery);
-            $insertStmt->bind_param("ssssss", $title, $author, $category, $type, $price, $description);
+            $insertStmt->bind_param("ssssss", $title, $author, $idCategory, $type, $price, $description);
 
             if($insertStmt->execute()) {
                 echo "Książka została dodana do oferty księgarni.";

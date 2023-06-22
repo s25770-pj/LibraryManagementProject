@@ -1,20 +1,26 @@
 <?php
+$host = "localhost";
+$db_user = "root";
+$db_password = "";
+$db_name = "ksiegarnia";
 
-    require_once "../SQL_Config/connect.php";
-
-    $sql_config = "../SQL_Config/connect.php";
+$connection = new mysqli($host, $db_user, $db_password, $db_name);
+      
+      if ($connection->connect_errno) {
+          exit("Błąd połączenia z bazą danych: " . $connection->connect_errno);
+      }
     $database = "../Includes/connection.php";
 
     $images = "../Images/";
 
-    $page = "../Page/page.php";
+    $page = "../Page/index.php";
     $user_panel = "../Page/user_panel.php";
-    $recharge_balance = "../Page/recharge_balance.php";
     $book_details = "../Page/book_details.php";
     $buy_premium = "../Page/buy_premium.php";
 
     $premium = "../Service/premium_purchase.php";
     $package_premium = "../Page/package_premium.php";
+    $premium_purchase = "../Service/premium_purchase.php";
 
     $login = "../Login/login.php";
     $login_panel = "../Login/login_panel.php";
@@ -26,10 +32,10 @@
     $rent_book = "../Service/rent_book.php";
     $rentals = "../Storage/rentals.php";
 
-    $rebalance = "../Service/recharge_balance.php";
+    $rebalance = "../Page/recharge_balance.php";
     $add_balance = "../Service/add_balance.php";
 
     $header = "../Includes/header.php";
 
     $style_css = "../Style/style.css";
-    $page_css = "../Style/xd.css";
+    $page_css = "../Style/page.css";

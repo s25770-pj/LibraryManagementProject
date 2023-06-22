@@ -10,24 +10,31 @@ session_start();
 	<meta charset="utf-8" />
 	<title>Księgarnia internetowa</title>
     <script src="../JS/browser.js"></script>
+    <script src="../JS/bgcolor.js"></script>
 	<link rel="stylesheet" href="<?php echo $page_css; ?>">
 
 </head>
 
-<body>
-
+<body onload="getBGColor()">
+    <header>
+        <?php require_once $header; ?>
+    </header>
+    <div class="bgcolor">
+    <h1>Kolor tła</h1>
+    <input type="color" id="colorInput" onchange="setBGColor()">
+    </div>
     <?php
     require_once $database;
     require_once $header;
     ?>
 
-    <header>
-        <?php require_once $header; ?>
-    </header>
-
     <main>
+        <h1>Dostępne pozycje:</h1>
+        <section id="bookResults">
+        
         <section class="searching"></section>
-        <section id="bookResults"></section>
+        
+        </section>
 
         <?php
         if (isset($_SESSION['login'])) {
@@ -45,7 +52,7 @@ session_start();
     </main>
 
     <footer>
-        <p>&copy; <?php echo date('Y'); ?> Twoja Firma. Wszelkie prawa zastrzeżone.</p>
+        <p>&copy; 2023 Twoja Firma. Wszelkie prawa zastrzeżone.</p>
     </footer>
 
     <script src="../JS/script.js"></script>

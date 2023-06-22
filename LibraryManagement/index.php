@@ -1,2 +1,2 @@
 <?php
-header("Location: Page/page.php");
+header("Location: Page/");

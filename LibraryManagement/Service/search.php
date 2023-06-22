@@ -3,37 +3,38 @@
 require_once "../Includes/path.php";
 require_once $database;
 
-//searching książki po wpisanej frazie
-if (isset($_POST['phrase']) && !empty($_POST['phrase']) && empty($_POST['category'])) {
+$patern ='/[^a-zA-ZąćżńóźęĆŻŃÓŹĘ0-9 ]/';
 
-    $phrase = $_POST['phrase'];
-    $phrase = urlencode($phrase);
-    $category = $_POST['category'];
-    $query = "SELECT * FROM stock WHERE title LIKE '%$phrase%' OR author LIKE '%$phrase%'";
+$phrase = isset($_POST['phrase']) ? $_POST['phrase'] : null;
+$phrase = preg_replace($patern,'',htmlspecialchars($phrase));
 
-//Po podanej frazie i gatunku
-} else if (isset($_POST['phrase']) && !empty($_POST['phrase']) && !empty($_GET['category'])) {
-    
-    $phrase = $_POST['phrase'];
-    $phrase = urlencode($phrase);
-    $category = $_POST['category'];
-    $query = "SELECT * FROM stock WHERE (title LIKE '%$phrase%' OR author LIKE '%$phrase%') AND category = '$category'";
+$category = isset($_POST['category']) ? $_POST['category'] : null;
+$category =  preg_replace($patern,'',htmlspecialchars($category));
+if(isset($_POST['phrase']) && !empty($_POST['phrase']))
+{
+  $phrase = $_POST['phrase'] == $phrase ? $phrase : NULL;
+  if($phrase == NULL){echo '<p> Brak książek pasujących do wyszukiwanej frazy. </p>';exit();}
+}
 
-//Po podanym gatunku
-} else if (isset($_POST['category']) && !empty($_POST['category'])){ 
-
-    $phrase = '';
-    $phrase = urlencode($phrase);
-    $category = $_POST['category'];
-    $query = "SELECT * FROM stock WHERE category = '$category'";
-
-//Kiedy nie podano ani frazy, ani gatunku
-} else {
-
-    $phrase = '';
-    $phrase = urlencode($phrase);
-    $category = '';
-    $query = "SELECT * FROM stock";
+if($phrase && $category)
+{
+  $query = "SELECT * FROM stock INNER JOIN category ON stock.category = category.id WHERE (title LIKE '%$phrase%' OR author LIKE '%$phrase%') AND name = '$category'";
+}
+else if($phrase)
+{
+  $query = "SELECT * FROM stock WHERE title LIKE '%$phrase%' OR author LIKE '%$phrase%'";
+}
+else if($category)
+{
+  $query = "SELECT * FROM stock INNER JOIN category ON stock.category = category.id WHERE name = '$category'";
+}
+else if($phrase == '')
+{
+  $query = "SELECT * FROM stock";
+}
+else {
+  echo '<p> Brak książek pasujących do wyszukiwanej frazy. </p>';
+  exit();
 }
 $result = $connection->query($query);
 
@@ -49,14 +50,14 @@ if ($result->num_rows > 0) {
 
       echo "<a href = '$book_details?book_id=$book_id'>";
 
-      $cover = $images."/".$row ['cover'] . '.jpg';
+      $cover = $images."/".$row ['cover'] . 'r.jpg';
 
-      echo '<img src="' . $cover . '" alt="Book cover"> <br />';
+      echo '<img src="' . $cover . '" alt="Book cover"> <br>';
       echo '</a>';
-
-      echo $row['title'] . '<br />';
-      echo $row['author'] . '<br />';
-
+      echo '<div>';
+      echo "<p>".$row['title'] . '</p>';
+      echo "<p>".$row['author'] . '</p>';
+      echo '</div>';
       echo '</li>';
 
     }

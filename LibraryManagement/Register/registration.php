@@ -174,110 +174,153 @@ require_once '../Includes/path.php';
 	<script src='https://www.google.com/recaptcha/api.js'></script>
 	
 	<style>
-		.error
-		{
-			color:red;
+		.error {
+			color: red;
 			margin-top: 10px;
 			margin-bottom: 10px;
+		}
+
+		body {
+			background-color: rgb(40, 40, 40);
+			color: #fff;
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			height: 100vh;
+		}
+		
+		.login-form {
+			width: 15%;
+			padding: 20px;
+			background-color: rgb(60, 60, 60);
+			border: 1px solid rgb(90, 90, 90);
+		}
+		
+		.login-form input[type="text"],
+		.login-form input[type="password"] {
+			width: 100%;
+			padding: 10px;
+			padding-right: 0;
+			margin-bottom: 10px;
+			border: 1px solid rgb(90, 90, 90);
+			background-color: rgb(80, 80, 80);
+			color: #fff;
+		}
+		
+		.login-form input[type="submit"] {
+			width: 100%;
+			padding: 10px;
+			background-color: rgb(90, 90, 90);
+			border: none;
+			color: #fff;
+			cursor: pointer;
+			border: 1px transparent solid;
+		}
+		
+		.login-form input[type="submit"]:hover {
+			border: 1px white solid;
+		}
+		
+		.login-form p {
+			text-align: center;
+			margin-top: 10px;
+		}
+		
+		.login-form a {
+			color: #fff;
 		}
 	</style>
 </head>
 
 <body>
-	
-	<form method="POST">
-	
-		Nickname: <br /> <input type="text" value="<?php
-			if (isset($_SESSION['fr_nick']))
-			{
-				echo $_SESSION['fr_nick'];
-				unset($_SESSION['fr_nick']);
-			}
-		?>" name="nick" /><br />
+	<div class="login-form">
+		<form method="POST">
 		
-		<?php
-			if (isset($_SESSION['e_nick']))
-			{
-				echo '<div class="error">'.$_SESSION['e_nick'].'</div>';
-				unset($_SESSION['e_nick']);
-			}
-		?>
-		
-		E-mail: <br /> <input type="text" value="<?php
-			if (isset($_SESSION['fr_email']))
-			{
-				echo $_SESSION['fr_email'];
-				unset($_SESSION['fr_email']);
-			}
-		?>" name="email" /><br />
-		
-		<?php
-			if (isset($_SESSION['e_email']))
-			{
-				echo '<div class="error">'.$_SESSION['e_email'].'</div>';
-				unset($_SESSION['e_email']);
-			}
-		?>
-		
-		Twoje hasło: <br /> <input type="password"  value="<?php
-			if (isset($_SESSION['fr_password1']))
-			{
-				echo $_SESSION['fr_password1'];
-				unset($_SESSION['fr_password1']);
-			}
-		?>" name="password1" /><br />
-		
-		<?php
-			if (isset($_SESSION['e_password']))
-			{
-				echo '<div class="error">'.$_SESSION['e_password'].'</div>';
-				unset($_SESSION['e_password']);
-			}
-		?>		
-		
-		Powtórz hasło: <br /> <input type="password" value="<?php
-			if (isset($_SESSION['fr_password2']))
-			{
-				echo $_SESSION['fr_password2'];
-				unset($_SESSION['fr_password2']);
-			}
-		?>" name="password2" /><br />
-		
-		<label>
-			<input type="checkbox" name="rules" <?php
-			if (isset($_SESSION['fr_rules']))
-			{
-				echo "checked";
-				unset($_SESSION['fr_rules']);
-			}
+			Login: <br />
+			<input type="text" value="<?php
+				if (isset($_SESSION['fr_nick'])) {
+					echo $_SESSION['fr_nick'];
+					unset($_SESSION['fr_nick']);
+				}
+			?>" name="nick" /> <br />
+			
+			<?php
+				if (isset($_SESSION['e_nick'])) {
+					echo '<div class="error">'.$_SESSION['e_nick'].'</div>';
+					unset($_SESSION['e_nick']);
+				}
+			?>
+			
+			E-mail: <br />
+			<input type="text" value="<?php
+				if (isset($_SESSION['fr_email'])) {
+					echo $_SESSION['fr_email'];
+					unset($_SESSION['fr_email']);
+				}
+			?>" name="email" /> <br />
+			
+			<?php
+				if (isset($_SESSION['e_email'])) {
+					echo '<div class="error">'.$_SESSION['e_email'].'</div>';
+					unset($_SESSION['e_email']);
+				}
+			?>
+			
+			Twoje hasło: <br />
+			<input type="password" value="<?php
+				if (isset($_SESSION['fr_password1'])) {
+					echo $_SESSION['fr_password1'];
+					unset($_SESSION['fr_password1']);
+				}
+			?>" name="password1" /> <br />
+			
+			<?php
+				if (isset($_SESSION['e_password'])) {
+					echo '<div class="error">'.$_SESSION['e_password'].'</div>';
+					unset($_SESSION['e_password']);
+				}
+			?>		
+			
+			Powtórz hasło: <br />
+			<input type="password" value="<?php
+				if (isset($_SESSION['fr_password2'])) {
+					echo $_SESSION['fr_password2'];
+					unset($_SESSION['fr_password2']);
+				}
+			?>" name="password2" /> <br />
+			
+			<label>
+				<input type="checkbox" name="rules" <?php
+					if (isset($_SESSION['fr_rules'])) {
+						echo "checked";
+						unset($_SESSION['fr_rules']);
+					}
 				?>/> Akceptuję rules
-		</label>
-		
-		<?php
-			if (isset($_SESSION['e_rules']))
-			{
-				echo '<div class="error">'.$_SESSION['e_rules'].'</div>';
-				unset($_SESSION['e_rules']);
-			}
-		?>	
-		
-		<div class="g-recaptcha" data-sitekey="6Le75SQmAAAAAODMcVX5bJwA2z6ko-h0bs4LfJTn"></div>
-		
-		<?php
-			if (isset($_SESSION['e_bot']))
-			{
-				echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
-				unset($_SESSION['e_bot']);
-			}
-		?>	
-		
-		<br />
-		
-		<input type="submit" value="Zarejestruj się" />
-
-		<p>[ <a href="../Ksiazki/index.php">Powrót</a> ]</p>
-		
-	</form>
-
+			</label>
+			
+			<?php
+				if (isset($_SESSION['e_rules'])) {
+					echo '<div class="error">'.$_SESSION['e_rules'].'</div>';
+					unset($_SESSION['e_rules']);
+				}
+			?>	
+			
+			<div class="g-recaptcha" data-sitekey="6Le75SQmAAAAAODMcVX5bJwA2z6ko-h0bs4LfJTn"></div>
+			
+			<?php
+				if (isset($_SESSION['e_bot'])) {
+					echo '<div class="error">'.$_SESSION['e_bot'].'</div>';
+					unset($_SESSION['e_bot']);
+				}
+			?>	
+			
+			<br />
+			
+			<input type="submit" value="Zarejestruj się" />
+	
+		</form>
+	
+		<p>[ <a href="<?php echo $page ?>">Powrót</a> ]</p>
+	</div>
 </body>
 </html>
