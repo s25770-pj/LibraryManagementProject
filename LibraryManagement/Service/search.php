@@ -18,15 +18,15 @@ if(isset($_POST['phrase']) && !empty($_POST['phrase']))
 
 if($phrase && $category)
 {
-  $query = "SELECT * FROM stock INNER JOIN category ON stock.category = category.id WHERE (title LIKE '%$phrase%' OR author LIKE '%$phrase%') AND name = '$category'";
+  $query = "SELECT stock.* FROM stock INNER JOIN category ON stock.category = category.id WHERE (title LIKE '%$phrase%' OR author LIKE '%$phrase%') AND name = '$category'";
 }
 else if($phrase)
 {
-  $query = "SELECT * FROM stock WHERE title LIKE '%$phrase%' OR author LIKE '%$phrase%'";
+  $query = "SELECT stock.*  FROM stock WHERE title LIKE '%$phrase%' OR author LIKE '%$phrase%'";
 }
 else if($category)
 {
-  $query = "SELECT * FROM stock INNER JOIN category ON stock.category = category.id WHERE name = '$category'";
+  $query = "SELECT stock.* FROM stock INNER JOIN category ON stock.category = category.id WHERE name = '$category'";
 }
 else if($phrase == '')
 {
