@@ -2,8 +2,8 @@
 
 session_start();
 
-require_once "../Includes/path.php";
-require_once $database;
+require_once "../Includes/config.php";
+require_once $config;
 if (!isset($_SESSION['login']))
 	{
 		header('Location:'. $local);
@@ -32,9 +32,7 @@ if (!isset($_SESSION['login']))
                 $id = $_SESSION['id'];
                 $date_time = new DateTime(date('Y-m-d H:i:s'));
                 $today = $date_time->format('Y-m-d H:i:s');
-                
-                require_once $database;
-                
+
                 $query = "SELECT premiumExpirationDate FROM users WHERE id = $id ";
                 $result = $connection->query($query);
                 $row = $result->fetch_assoc();

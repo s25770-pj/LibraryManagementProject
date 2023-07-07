@@ -1,8 +1,6 @@
 <html>
-
 <?php
-
-require_once '../Includes/path.php';
+require_once '../Includes/config.php';
 
 session_start();
 
@@ -11,7 +9,6 @@ if (!isset($_SESSION['login']))
 		header('Location: ' . $page);
 		exit();
 	}
-
     $buypremium_sum = '';
 
 if (isset($_POST['buypremium'])) {
@@ -25,10 +22,8 @@ if (isset($_POST['buypremium'])) {
         $buypremium_sum = '100.00';
     }
 }
-
 ?>
 <head>
-
 <link rel="stylesheet" href="../Style/main.css">
 
 <style>body{background-color: black;}</style>

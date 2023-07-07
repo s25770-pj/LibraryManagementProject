@@ -1,7 +1,7 @@
 <?php
 
-require_once "../Includes/path.php";
-require_once $database;
+require_once "../Includes/config.php";
+require_once $config;
 session_start();
 
 if(isset($_GET['book_id'])){
@@ -77,7 +77,6 @@ if(isset($_GET['book_id'])){
             if (isset($_SESSION['login'])) {
               $user_id = $_SESSION['id'];
             }
-
             $is_rent = "SELECT * FROM rentals WHERE user_id = ? AND book_id = ? AND return_date > ?";
 
             $querySelect = $connection->prepare($is_rent);
@@ -110,28 +109,17 @@ if(isset($_GET['book_id'])){
                   echo '<input type = "submit" name = "recharge" value = "Doładuj saldo" class = "button">';
                 echo '</form>';
               }
-
             echo '</div>'; 
-
           echo '</div>';
-
         echo '<div class = "prawa"></div>'; 
-
       echo '</div>';
-
-
       }
-
     } else {
       echo 'Nie istnieje taka ksiazka ECPU Polska, witamy Polsko';
     }
-
     $connection->close();
-
   } else {
-
   echo 'Brak przesłanego ID książki.';
-
 }
 
 ?>

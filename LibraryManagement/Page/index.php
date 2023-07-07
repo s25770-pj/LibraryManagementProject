@@ -1,5 +1,5 @@
 <?php
-require_once '../Includes/path.php';
+require_once '../Includes/config.php';
 session_start();
 ?>
 
@@ -19,17 +19,14 @@ session_start();
     <header>
         <?php require_once $header; ?>
     </header>
-    <div class="bgcolor">
-    <h1>Kolor tła</h1>
-    <input type="color" id="colorInput" onchange="setBGColor()">
-    </div>
     <?php
-    require_once $database;
     require_once $header;
     ?>
 
     <main>
+        <div id="h1">
         <h1>Dostępne pozycje:</h1>
+        </div>
         <section id="bookResults">
         
         <section class="searching"></section>

@@ -4,23 +4,18 @@
 
     <?php
 
-    require_once '../Includes/path.php';
+    require_once '../Includes/config.php';
 
     $parsedUrl = parse_url($_SERVER['REQUEST_URI']);
     $filename = basename($parsedUrl['path']);
     if($filename != 'index.php' && $filename != 'Service')
     {
-
         ?>
         <div id = "go_back">
             <button class = "button_back" onclick="window.location.href = '<?php echo $page; ?>'">Powrót do menu</button>
         </div>
-    
-
-        <?php
-
+    <?php
     }
-
     ?>
 
     <div class = 'banner'>
@@ -117,29 +112,24 @@
         <?php
         }
         ?>
-
     </div>
     <?php
     if($filename == 'index.php' || $filename == 'Page' ){
         ?>
-
         <div id="searching">
-            
-        <label for="what_category">
-            <select id="what_category" onchange="searchBooks()" class="search_category"><option value="">Wybierz categorie</option>
+            <label for="what_category">
+            <select id="what_category" onchange="searchBooks()" class="search_category"><option value="">Wybierz kategorie</option>
             <?php 
             
-            var_dump('ok');
             $query = "SELECT name FROM category";
-            $result=$connection->query($query);
-            var_dump($rows);           
+            $result=$connection->query($query);        
             while($row = $result->fetch_assoc())
             {
                 echo '<option value="'.$row['name'].'">'.$row['name'].'</option>';
             }
             ?>
             </select>
-        </label>
+            </label>
 
         <input type="text" id="find_phrase" placeholder="Wyszukaj książkę lub autora" oninput="searchBooks()" class="find_text">
         </div>

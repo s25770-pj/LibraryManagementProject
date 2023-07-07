@@ -1,6 +1,6 @@
 <?php
 
-	require_once '../Includes/path.php';
+	require_once '../Includes/config.php';
 
 	session_start();
 	
@@ -51,21 +51,14 @@
 
 					header('Location: '. $page);
 				} else {
-
 					$_SESSION['error'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
 					header('Location:' . $login_panel);
-					
 				}
-				
 			} else {
-				
 				$_SESSION['error'] = '<span style="color:red">Nieprawidłowy login lub hasło!</span>';
 				header('Location:' . $login_panel);
-				
 			}
-			
 		}
-		
 		$connection->close();
 	}
 	

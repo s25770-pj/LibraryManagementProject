@@ -2,7 +2,7 @@
 
 	session_start();
 
-	require_once "../Includes/path.php";
+	require_once "../Includes/config.php";
 	
 	if (!isset($_SESSION['login']))
 	{

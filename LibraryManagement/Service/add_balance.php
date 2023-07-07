@@ -2,7 +2,7 @@
 
 <?php
 
-require_once '../Includes/path.php';
+require_once '../Includes/config.php';
 
 session_start();
 

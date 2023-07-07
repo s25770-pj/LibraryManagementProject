@@ -1,17 +1,14 @@
 <?php
 
-require_once '../Includes/path.php';
+require_once '../Includes/config.php';
 
 	session_start();
 	
 	if (isset($_POST['email']))
 	{
 		$OK=true;
-		
-		//Sprawdź poprawność nickname'a
 		$nick = $_POST['nick'];
 		
-		//checkenie długości nicka
 		if ((strlen($nick)<3) || (strlen($nick)>20))
 		{
 			$OK=false;
@@ -23,8 +20,6 @@ require_once '../Includes/path.php';
 			$OK=false;
 			$_SESSION['e_nick']="Nick może składać się tylko z liter i cyfr (bez polskich znaków)";
 		}
-		
-		// Sprawdź poprawność adresu email
 		$email = $_POST['email'];
 		$emailB = filter_var($email, FILTER_SANITIZE_EMAIL);
 		
@@ -33,8 +28,6 @@ require_once '../Includes/path.php';
 			$OK=false;
 			$_SESSION['e_email']="Podaj poprawny adres e-mail!";
 		}
-		
-		//Sprawdź poprawność hasła
 		$password1 = $_POST['password1'];
 		$password2 = $_POST['password2'];
 		
@@ -52,14 +45,11 @@ require_once '../Includes/path.php';
 
 		$password_hash = password_hash($password1, PASSWORD_DEFAULT);
 		
-		//Czy zaakceptowano rules?
 		if (!isset($_POST['rules']))
 		{
 			$OK=false;
 			$_SESSION['e_rules']="Potwierdź akceptację rulesu!";
 		}				
-		
-		//Bot or not?
 		$secret = "6Le75SQmAAAAAIcJxQeeNxHMuCRhaf-Pqq4uYyTd";
 		
 		$check = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secret.'&response='.$_POST['g-recaptcha-response']);
@@ -71,8 +61,6 @@ require_once '../Includes/path.php';
 			$OK=false;
 			$_SESSION['e_bot']="Potwierdź, że nie jesteś botem!";
 		}		
-		
-		//Zapamiętaj wprowadzone dane
 		$_SESSION['fr_nick'] = $nick;
 		$_SESSION['fr_email'] = $email;
 		$_SESSION['fr_password1'] = $password1;
@@ -80,7 +68,6 @@ require_once '../Includes/path.php';
 		if (isset($_POST['rules'])) $_SESSION['fr_rules'] = true;
 		
 		mysqli_report(MYSQLI_REPORT_STRICT);
-		
 		try 
 		{
 			$connection = new mysqli($host, $db_user, $db_password, $db_name);
@@ -90,7 +77,6 @@ require_once '../Includes/path.php';
 			}
 			else
 			{
-				//Czy email już istnieje?
 				$result = $connection->query("SELECT id FROM users WHERE email='$email'");
 				
 				if (!$result) throw new Exception($connection->error);
@@ -101,8 +87,6 @@ require_once '../Includes/path.php';
 					$OK=false;
 					$_SESSION['e_email']="Istnieje już konto przypisane do tego adresu e-mail!";
 				}		
-
-				//Czy nick jest już zarezerwowany?
 				$result = $connection->query("SELECT id FROM users WHERE user='$nick'");
 				
 				if (!$result) throw new Exception($connection->error);
@@ -116,18 +100,12 @@ require_once '../Includes/path.php';
 				
 				if ($OK==true)
 				{
-					//Wszystkie testy zaliczone, dodajemy uzytkownika do bazy
-					
 					if ($connection->query("INSERT INTO users (access, user, pass, email, premiumExpirationDate) VALUES ('user', '$nick', '$password_hash', '$email', now())"))
 					{
 						$user_id = $connection->insert_id;
 
-						//Dodanie potrfela przypisanego do uzytkownika do bazy
-
 						if ($connection->query("INSERT INTO wallets (user_id) VALUES ('$user_id')")) {
 							$wallet_id = $connection->insert_id;
-
-							//Aktualizacja użytkownika o ID portfela
 
 							if ($connection->query("UPDATE users SET wallet_id = '$wallet_id' WHERE id = '$user_id'")) {
 
@@ -135,33 +113,25 @@ require_once '../Includes/path.php';
 						header('Location: welcome.php');
 
 							} else {
-
 								throw new Exception($connection->error);
-
 							}
 
 						} else {
-
 							throw new Exception($connection->error);
-
 						}
 					}
 					else
 					{
 						throw new Exception($connection->error);
 					}
-					
 				}
-				
 				$connection->close();
 			}
-			
 		}
 		catch(Exception $e)
 		{
 			echo '<span style="color:red;">Błąd serwera! Przepraszamy za niedogodności i prosimy o rejestrację w innym terminie!</span>';
 		}
-		
 	}
 	
 	
@@ -172,64 +142,7 @@ require_once '../Includes/path.php';
 <head>
 	<meta charset="utf-8" />
 	<script src='https://www.google.com/recaptcha/api.js'></script>
-	
-	<style>
-		.error {
-			color: red;
-			margin-top: 10px;
-			margin-bottom: 10px;
-		}
-
-		body {
-			background-color: rgb(40, 40, 40);
-			color: #fff;
-			display: flex;
-			justify-content: center;
-			align-items: center;
-			height: 100vh;
-		}
-		
-		.login-form {
-			width: 15%;
-			padding: 20px;
-			background-color: rgb(60, 60, 60);
-			border: 1px solid rgb(90, 90, 90);
-		}
-		
-		.login-form input[type="text"],
-		.login-form input[type="password"] {
-			width: 100%;
-			padding: 10px;
-			padding-right: 0;
-			margin-bottom: 10px;
-			border: 1px solid rgb(90, 90, 90);
-			background-color: rgb(80, 80, 80);
-			color: #fff;
-		}
-		
-		.login-form input[type="submit"] {
-			width: 100%;
-			padding: 10px;
-			background-color: rgb(90, 90, 90);
-			border: none;
-			color: #fff;
-			cursor: pointer;
-			border: 1px transparent solid;
-		}
-		
-		.login-form input[type="submit"]:hover {
-			border: 1px white solid;
-		}
-		
-		.login-form p {
-			text-align: center;
-			margin-top: 10px;
-		}
-		
-		.login-form a {
-			color: #fff;
-		}
-	</style>
+	<link rel="stylesheet" href=<?php echo $registrationCss ?>>
 </head>
 
 <body>

@@ -1,9 +1,9 @@
 <?php
 
-require_once "../Includes/path.php";
-require_once $database;
+require_once "../Includes/config.php";
+require_once $config;
 
-$patern ='/[^a-zA-ZąćżńóźęĆŻŃÓŹĘ0-9 ]/';
+$patern ='/[^a-zA-ZąćżńóźęłŁĆŻŃÓŹĘ0-9 ]/';
 
 $phrase = isset($_POST['phrase']) ? $_POST['phrase'] : null;
 $phrase = preg_replace($patern,'',htmlspecialchars($phrase));

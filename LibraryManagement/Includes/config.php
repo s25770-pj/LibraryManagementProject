@@ -1,4 +1,5 @@
 <?php
+
 $host = "localhost";
 $db_user = "root";
 $db_password = "";
@@ -9,8 +10,7 @@ $connection = new mysqli($host, $db_user, $db_password, $db_name);
       if ($connection->connect_errno) {
           exit("Błąd połączenia z bazą danych: " . $connection->connect_errno);
       }
-    $database = "../Includes/connection.php";
-
+    $config = "../Includes/config.php";
     $images = "../Images/";
 
     $page = "../Page/index.php";
@@ -27,6 +27,7 @@ $connection = new mysqli($host, $db_user, $db_password, $db_name);
     $logout = "../Login/logout.php";
 
     $registration = "../Register/registration.php";
+    $registrationCss = "../Style/registration.css";
 
     $add_book = "../Service/add_book.php";
     $rent_book = "../Service/rent_book.php";

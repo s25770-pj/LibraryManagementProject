@@ -1,6 +1,6 @@
 <?php
 
-require_once '../Includes/path.php';
+require_once '../Includes/config.php';
 ?>
 <link rel="stylesheet" href="../Style/rentals.css">
 <?php 
